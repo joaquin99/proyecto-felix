@@ -22,7 +22,7 @@ public class DibujarEdificio extends JPanel{
 	private ImgRalph imgRalph;
 	private ImgLadrillo imgLadrillo;
 	private ImgPajaro imgPajaro;
-	private ControladorFelix controladorFelix;
+	private ControladorFelix controlPersonaje;
 	
 	private static DibujarEdificio INSTANCE;
 	
@@ -73,8 +73,8 @@ public class DibujarEdificio extends JPanel{
 			e.printStackTrace();
 		}
 		
-		controladorFelix = new ControladorFelix(ventanas);
-		//DibujarNivel.getInstance().addKeyListener(controladorFelix);
+		//Se agrega el controladorFelix al nivel para permitir su control
+		controlPersonaje = new ControladorFelix(ventanas);
 		
 		this.setSize(500, 500);
 		this.setLocation(100,0);
@@ -83,6 +83,8 @@ public class DibujarEdificio extends JPanel{
 	
 	
 	public static DibujarEdificio getInstance(){
+	
+		//System.out.println("INSTANCE DibujarEdificio: "+INSTANCE);
 		if(INSTANCE == null)
 			INSTANCE = new DibujarEdificio();
 		return INSTANCE;
@@ -90,7 +92,7 @@ public class DibujarEdificio extends JPanel{
 	
 	public void dibujar(Graphics g){
 		
-		DibujarNivel.getInstance().addKeyListener(controladorFelix);
+		//DibujarNivel.getInstance().addKeyListener(controladorFelix);
 		switch (nroSeccion) { //Va a dibujar una version del edificio dependiendo de la seccion
 		
 		case 0:
@@ -195,7 +197,7 @@ public class DibujarEdificio extends JPanel{
 		this.ventanas = ventanas;
 		this.nroSeccion = nroSec;
 		this.enemigos = enemigos;
-		this.controladorFelix.setMatrizVentanas(ventanas);
+		this.controlPersonaje.setMatrizVentanas(ventanas);
 	}
 	
 	@Override
@@ -228,7 +230,7 @@ public class DibujarEdificio extends JPanel{
 	@Override
 	public void paintComponents(Graphics g) {
 		// TODO Auto-generated method stub
-		DibujarNivel.getInstance().addKeyListener(controladorFelix);
+		//DibujarNivel.getInstance().addKeyListener(controlPersonaje);
 		super.paintComponents(g);
 		dibujar(g);
 	}
@@ -282,6 +284,11 @@ public class DibujarEdificio extends JPanel{
 		}
 		
 		return imagen;
+	}
+	
+	//Retorna el ControladorFelix. Le permite a DibujarNivel agregarlo al frame
+	public ControladorFelix getControlPersonaje() {
+		return controlPersonaje;
 	}
 	
 }

@@ -13,6 +13,8 @@ public class DibujarNivel extends JFrame{
 		this.setLayout(null);
 		this.setSize(600, 600);
 		DibujarEdificio de=DibujarEdificio.getInstance();
+		//El controladorFelix creado en DibujarEdificio se agrega al frame
+		this.addKeyListener(DibujarEdificio.getInstance().getControlPersonaje());
 		System.out.println(de.getComponentCount());
 		this.add(de);
 		this.setVisible(true);
@@ -21,6 +23,7 @@ public class DibujarNivel extends JFrame{
 	}
 	
 	public static DibujarNivel getInstance(){
+		//System.out.println("INSTANCE DibujarNivel: "+INSTANCE);
 		if(INSTANCE == null){
 			INSTANCE = new DibujarNivel();
 		}

@@ -11,6 +11,7 @@ import graficos.DibujarNivel;
 public class ControladorFelix implements KeyListener{
 	
 	private Ventana[][] matrizVentanas;
+	private int movido = 0;
 	
 	public ControladorFelix() {
 	}
@@ -23,7 +24,7 @@ public class ControladorFelix implements KeyListener{
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		int key = arg0.getKeyCode();
-		System.out.print("Se intenta realizar un movimiento hacia ");
+		System.out.println("Se intenta realizar un movimiento hacia ");
 		boolean mover = true;
 		switch(key) {
 		
@@ -42,22 +43,23 @@ public class ControladorFelix implements KeyListener{
 			arreglarTodo();
 		}
 		if (mover == true) {
+			System.out.println("Se movio");
+			movido++;
+			System.out.println("Se movio "+movido+" veces");
 			Felix.getInstance().mover(matrizVentanas);
+			Felix.getInstance().setDireccion(Direccion.ABAJO);
 		}
 		DibujarNivel.getInstance().repaint();
+		
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	
