@@ -52,8 +52,8 @@ public class TimerNivel extends Timer{
 					while(enemigos.size() != 0)
 						enemigos.remove(0);
 					Felix.getInstance().posInicial();
-					//DibujarEdificio.getInstance().actualizar(edificioNivel.getSeccion(seccionActual).getMatrizVentanas(),seccionActual, enemigos);
-					//DibujarEdificio.getInstance().repaint();
+					DibujarEdificio.getInstance().actualizar(edificioNivel.getSeccion(seccionActual).getMatrizVentanas(),seccionActual, enemigos);
+					DibujarEdificio.getInstance().repaint();
 					//nivelActual.terminar();
 				}
 			}
@@ -77,7 +77,7 @@ public class TimerNivel extends Timer{
 					
 				}
 				else if((edificioNivel.getSeccion(seccionActual).condicionVictoriaSeccion()) && (seccionActual == 2)) {
-					
+				
 					//nivelActual.terminar();
 					cancel();
 					purge();
