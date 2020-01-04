@@ -22,6 +22,7 @@ public class DibujarEdificio extends JPanel{
 	private ImgRalph imgRalph;
 	private ImgLadrillo imgLadrillo;
 	private ImgPajaro imgPajaro;
+	private ImgTarta imgTarta;
 	private ControladorFelix controlPersonaje;
 	
 	private static DibujarEdificio INSTANCE;
@@ -68,6 +69,13 @@ public class DibujarEdificio extends JPanel{
 		
 		try {
 			imgPajaro = new ImgPajaro();
+		} 
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			imgTarta = new ImgTarta();
 		} 
 		catch (IOException e) {
 			e.printStackTrace();
@@ -168,7 +176,12 @@ public class DibujarEdificio extends JPanel{
 								}
 							}
 						}
-						
+				
+				//Dibuja la tarta
+				if(ventanas[j][i].hayTarta()) {
+					g.drawImage(imgTarta.tarta,47+50*j,276-78*i,null);
+				}
+				
 			}
 			
 		}

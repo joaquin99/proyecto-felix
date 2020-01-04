@@ -70,7 +70,9 @@ public class Felix extends Entidad{
 	
 	public void recolectarTarta(Ventana v) {
 		if(v.hayTarta()){
+			System.out.println("Se ha recolectado una tarta");
 			setEstado(EstadosFelix.INMUNE);
+			v.setTarta(false);
 		}
 	}
 	
@@ -86,13 +88,14 @@ public class Felix extends Entidad{
 	}
 	
 	public void mover(Ventana[][] ventanas){
-		
+		//No permite dejarla sin inicializar
+		Ventana ventanaSiguiente = ventanas[getPos().getPosX()][getPos().getPosY()];
 		System.out.println("Felix intenta moverse");
 		if(noSeCae()){
 			boolean frenar = false;
 			Ventana ventanaActual = ventanas[getPos().getPosX()][getPos().getPosY()];
 			if(getDireccion().equals(Direccion.DERECHA)){
-				Ventana ventanaSiguiente = ventanas[getPos().getPosX() + 1][getPos().getPosY()];
+				ventanaSiguiente = ventanas[getPos().getPosX() + 1][getPos().getPosY()];
 				if(ventanaSiguiente.tieneObstaculos()){
 					Obstaculo [] obstaculosVS = ventanaSiguiente.getObstaculos();
 					for(int i = 0; ((i < obstaculosVS.length)&&(!frenar)); i++){
@@ -111,7 +114,7 @@ public class Felix extends Entidad{
 			}
 			else
 				if(getDireccion().equals(Direccion.ARRIBA)){
-					Ventana ventanaSiguiente = ventanas[getPos().getPosX()][getPos().getPosY() + 1];
+					ventanaSiguiente = ventanas[getPos().getPosX()][getPos().getPosY() + 1];
 					if(ventanaSiguiente.tieneObstaculos()){
 						Obstaculo [] obstaculosVS = ventanaSiguiente.getObstaculos();
 						for(int i = 0; ((i < obstaculosVS.length)&&(!frenar)); i++){
@@ -129,7 +132,7 @@ public class Felix extends Entidad{
 				}
 				else
 					if(getDireccion().equals(Direccion.ABAJO)){
-						Ventana ventanaSiguiente = ventanas[getPos().getPosX()][ getPos().getPosY() - 1];
+						ventanaSiguiente = ventanas[getPos().getPosX()][ getPos().getPosY() - 1];
 						if(ventanaSiguiente.tieneObstaculos()){
 							Obstaculo [] obstaculosVS = ventanaSiguiente.getObstaculos();
 							for(int i = 0; ((i < obstaculosVS.length)&&(!frenar)); i++){
@@ -145,8 +148,13 @@ public class Felix extends Entidad{
 							}
 						}
 					}
-			if(!frenar)
+			if(!frenar) {
+				//Se prueba para intentar recolectar tarta
+				if(getDireccion() == Direccion.IZQUIERDA)
+					ventanaSiguiente = ventanas[getPos().getPosX()-1][getPos().getPosY()];
+				recolectarTarta(ventanaSiguiente);
 				mover();
+			}
 		}
 	}
 

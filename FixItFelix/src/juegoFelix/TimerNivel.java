@@ -23,6 +23,8 @@ import java.math.*;
 
 public class TimerNivel extends Timer{
 
+	private final int SEGUNDO = 1000;
+	
 	int tiempoTotal = 10;
 	int seccionActual = 0;
 	private Nivel nivelActual;
@@ -31,6 +33,8 @@ public class TimerNivel extends Timer{
 	ArrayList<Enemigo> enemigos = new ArrayList<Enemigo>();
 	
 	public TimerNivel(Nivel nivelActual,Edificio edificioNivel) {
+
+		
 		//Da un error en ejecucion al hacer getSeccion. Parece que no se crean
 		//this.controlFelix = controlFelix;
 		this.nivelActual = nivelActual;
@@ -46,7 +50,6 @@ public class TimerNivel extends Timer{
 			public void run() {
 				// TODO Auto-generated method stub
 				//Si se gana la seccion	
-				System.out.println("Evalua cambiar de seccion");
 				if(edificioNivel.getSeccion(seccionActual).condicionVictoriaSeccion() && seccionActual < (NUM_SECCIONES-1)){
 					seccionActual++;
 					System.out.println("Usted ha subido a la seccion " + seccionActual);
@@ -139,7 +142,8 @@ public class TimerNivel extends Timer{
 				boolean tartaGenerada = false;
 				for(int i = 0;i < ventanasSeccion.length && !tartaGenerada;i++) {
 					for(int j = 0;j < ventanasSeccion[i].length && !tartaGenerada;j++)
-						if(Math.random()*15 == 7) {
+						if(Math.random()*10 > 7) {
+							System.out.println("Se ha generado una tarta!");
 							ventanasSeccion[i][j].setTarta(true);
 							tartaGenerada = true;
 							//Agregar tarta en grafica
@@ -147,6 +151,28 @@ public class TimerNivel extends Timer{
 				}
 			}	
 			
+		};
+		
+		//Controla el tiempo en el cual Felix puede ser inmune, volviendo a estado normal
+		TimerTask controlarInmunidad = new TimerTask() {
+			
+			private final int TIEMPO_MAXIMO_INMUNIDAD = 5;
+			private boolean contar = false;
+			private int contador = 0;
+			
+			public void run() {
+				if(Felix.getInstance().getEstado() == EstadosFelix.INMUNE)
+					contar = true;
+				if(contar) {
+					contador++;
+					if(contador == TIEMPO_MAXIMO_INMUNIDAD) {
+						Felix.getInstance().setEstado(EstadosFelix.NORMAL);
+						contar = false;
+						contador = 0;
+					}
+				}
+				
+			}
 		};
 		
 		
@@ -195,16 +221,17 @@ public class TimerNivel extends Timer{
 			
 		};
 		*/
-		System.out.println("Se cargan las nuevas timertasks");
+		
 		Felix.getInstance().setEstado(EstadosFelix.NORMAL);
 		System.out.println("Estado de Felix: "+Felix.getInstance().getEstado());
 		this.schedule(condicionesFinSeccion,0,10);
 		this.schedule(condicionesFinNivel,0,100);
-		this.schedule(generarEnemigos,0,1000*20);
-		this.schedule(generarTarta,0,1000*300);
+		this.schedule(generarEnemigos,0,SEGUNDO*20);
+		//this.schedule(generarTarta,0,1000*300);
+		this.schedule(generarTarta,0,SEGUNDO*20);
+		this.schedule(controlarInmunidad, 0,SEGUNDO);
 		this.schedule(comportamientoEnemigos,0,100);
 		//this.schedule(tiempoJuego,0,1000);
-		System.out.println("Se terminan de cargar las nuevas timertasks");
 		
 	}
 	
@@ -213,7 +240,7 @@ public class TimerNivel extends Timer{
 		enemigos.removeAll(enemigos);
 		this.cancel();
 		this.purge();
-		System.out.println("Perdiste y fuiste");
+		System.out.println("Perdiste");
 		nivelActual.finDelNivel();
 	}
 	

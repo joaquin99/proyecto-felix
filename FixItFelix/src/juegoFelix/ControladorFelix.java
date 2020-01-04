@@ -36,14 +36,16 @@ public class ControladorFelix implements KeyListener{
 		
 		case KeyEvent.VK_DOWN: Felix.getInstance().setDireccion(Direccion.ABAJO); break;
 		
-		case KeyEvent.VK_V: System.out.println("Vidas: "+Felix.getInstance().getVidas()); break;
+		case KeyEvent.VK_V: System.out.println("Estado: "+Felix.getInstance().getEstado()); mover=false; break;
 		
 		case KeyEvent.VK_SPACE: 
 			mover = false;
 			Felix.getInstance().arreglarVentana(matrizVentanas[Felix.getInstance().getPos().getPosX()][Felix.getInstance().getPos().getPosY()]);
 			for(int i = 0;i < matrizVentanas.length;i++) {
 				for(int j = 0;j < matrizVentanas[i].length;j++) {
-					if(matrizVentanas[i][j].getEstaArreglado())
+					if(matrizVentanas[i][j].hayTarta())
+						System.out.print("T ");
+					else if(matrizVentanas[i][j].getEstaArreglado())
 						System.out.print("O ");
 					else
 						System.out.print("X ");
