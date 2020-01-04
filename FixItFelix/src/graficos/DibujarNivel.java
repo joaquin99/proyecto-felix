@@ -29,4 +29,13 @@ public class DibujarNivel extends JFrame{
 		}
 		return INSTANCE;
 	}
+	
+	//Para eliminar la ventana despues de que termina el juego
+	public void ocultar() {
+		if(INSTANCE != null) {
+			INSTANCE.setVisible(false);
+			INSTANCE.dispose();
+			INSTANCE = null;
+		}
+	}
 }

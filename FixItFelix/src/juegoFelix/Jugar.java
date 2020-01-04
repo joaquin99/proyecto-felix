@@ -3,6 +3,7 @@ import javax.swing.JOptionPane;
 
 import entidades.EstadosFelix;
 import entidades.Felix;
+import graficos.DibujarNivel;
 import juegoFelix.Jugador;
 import juegoFelix.Nivel;
 
@@ -22,6 +23,7 @@ public class Jugar {
 		this.controladorApp = controladorApp;
 		controladorJuego = new ControladorJugar(nroNivel,this);
 		jugador = new Jugador();
+		Felix.getInstance().reiniciar();
 		Nivel nivel = new Nivel(nroNivel,(AUMENTO_VENTANAS * (nroNivel+1)), AUMENTO_TIEMPO * (nroNivel+1),this.controladorJuego);
 		nivel.iniciar();
 		
@@ -55,6 +57,8 @@ public class Jugar {
 		jugador.setNombre(nombreJugador);
 		jugador.setPuntos(Felix.getInstance().getPuntos());
 		this.enJuego = false;
+		//Para intentar eliminar la ventana del juego
+		DibujarNivel.getInstance().ocultar();
 		controladorApp.volverAlMenu();
 	}
 	
@@ -63,6 +67,8 @@ public class Jugar {
 		System.out.println("Has perdido");
 		JOptionPane.showMessageDialog(null, "Ha perdido!");
 		this.enJuego = false;
+		//Para intentar eliminar la ventana del juego
+		DibujarNivel.getInstance().ocultar();
 		controladorApp.volverAlMenu();
 	}
 	
