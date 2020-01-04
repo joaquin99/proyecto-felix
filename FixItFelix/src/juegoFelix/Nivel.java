@@ -52,7 +52,7 @@ public class Nivel {
 	/**Verdadero si Felix se quedo sin vidas o se acabo el tiempo
 	  **/
 	public boolean condicionesDerrota() {	
-		return (Felix.getInstance().getEstado().equals(EstadosFelix.GOLPEADOLADRILLO)) || (Felix.getInstance().getEstado().equals(EstadosFelix.GOLPEADOPAJARO));
+		return (Felix.getInstance().getEstado().equals(EstadosFelix.GOLPEADOLADRILLO)) || (Felix.getInstance().getEstado().equals(EstadosFelix.GOLPEADOPAJARO) || (Felix.getInstance().getVidas() == 0));
 	}
 	
   
@@ -68,8 +68,11 @@ public class Nivel {
   }
 
 	public void reiniciar(){
-		for(int i = seccionActual; i < edificioNivel.getSecciones(); i++)
+		for(int i = seccionActual; i < Edificio.getSecciones(); i++)
 			edificioNivel.getSeccion(i).iniciarSeccion(i);
+		//Agregada para ver qué ocurre
+		enemigos = new ArrayList<Enemigo>();
+		timer = new TimerNivel(this,edificioNivel);
 	}
   
 	

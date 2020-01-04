@@ -46,6 +46,7 @@ public class TimerNivel extends Timer{
 			public void run() {
 				// TODO Auto-generated method stub
 				//Si se gana la seccion	
+				System.out.println("Evalua cambiar de seccion");
 				if(edificioNivel.getSeccion(seccionActual).condicionVictoriaSeccion() && seccionActual < (NUM_SECCIONES-1)){
 					seccionActual++;
 					System.out.println("Usted ha subido a la seccion " + seccionActual);
@@ -70,20 +71,24 @@ public class TimerNivel extends Timer{
 				// TODO Auto-generated method stub
 				if(nivelActual.condicionesDerrota()){
 					//nivelActual.terminar();
+					/*
 					cancel();
 					purge();
 					System.out.println("Perdiste");
 					nivelActual.finDelNivel();
-					
+					*/
+					terminarTimerNivelDerrota();
 				}
 				else if((edificioNivel.getSeccion(seccionActual).condicionVictoriaSeccion()) && (seccionActual == 2)) {
 				
 					//nivelActual.terminar();
+					/*
 					cancel();
 					purge();
 					System.out.println("Ganaste el nivel!");
 					nivelActual.finDelNivel();
-					
+					*/
+					terminarTimerNivelVictoria();
 				}
 			}
 		
@@ -100,8 +105,13 @@ public class TimerNivel extends Timer{
 				for(Enemigo e:enemigos) {
 					
 					e.mover();
-					if(nivelActual.hayColision(Felix.getInstance().getPos(), e.getPos()))
+					if(nivelActual.hayColision(Felix.getInstance().getPos(), e.getPos())) {
+						System.out.println("Felix ha sido golpeado!");
 						Felix.getInstance().daniarse(e);
+						//Para probar si así funciona, ya que parece que el enemigo sigue en el lugar haciendo daño
+						//enemigos.removeAll(enemigos);
+						//terminarTimerNivelDerrota();
+					}
 					
 					if(!nivelActual.estaEnSeccion(e))
 						paraRemover.add(e);
@@ -185,13 +195,35 @@ public class TimerNivel extends Timer{
 			
 		};
 		*/
-		
+		System.out.println("Se cargan las nuevas timertasks");
+		Felix.getInstance().setEstado(EstadosFelix.NORMAL);
+		System.out.println("Estado de Felix: "+Felix.getInstance().getEstado());
 		this.schedule(condicionesFinSeccion,0,10);
 		this.schedule(condicionesFinNivel,0,100);
 		this.schedule(generarEnemigos,0,1000*20);
 		this.schedule(generarTarta,0,1000*300);
 		this.schedule(comportamientoEnemigos,0,100);
 		//this.schedule(tiempoJuego,0,1000);
+		System.out.println("Se terminan de cargar las nuevas timertasks");
 		
 	}
+	
+	//Desactiva los timerTasks y va al final del nivel. Si este codigo se ejecuta un timerTask puede fallar
+	private void terminarTimerNivelDerrota() {
+		enemigos.removeAll(enemigos);
+		this.cancel();
+		this.purge();
+		System.out.println("Perdiste y fuiste");
+		nivelActual.finDelNivel();
+	}
+	
+	//Igual que terminarNivelDerrota pero en caso de victoria
+	private void terminarTimerNivelVictoria() {
+		enemigos.removeAll(enemigos);
+		this.cancel();
+		this.purge();
+		System.out.println("Ganaste el nivel!");
+		nivelActual.finDelNivel();
+	}
+	
 }	

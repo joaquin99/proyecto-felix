@@ -29,6 +29,7 @@ public class ControladorJugar{
 		else {
 			if(noLeQuedanVidas()) {
 				System.out.println("Ha perdido");
+				jugar.derrota();
 				
 			}
 			//Gano el juego

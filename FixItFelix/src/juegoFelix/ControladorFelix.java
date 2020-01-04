@@ -36,6 +36,8 @@ public class ControladorFelix implements KeyListener{
 		
 		case KeyEvent.VK_DOWN: Felix.getInstance().setDireccion(Direccion.ABAJO); break;
 		
+		case KeyEvent.VK_V: System.out.println("Vidas: "+Felix.getInstance().getVidas()); break;
+		
 		case KeyEvent.VK_SPACE: 
 			mover = false;
 			Felix.getInstance().arreglarVentana(matrizVentanas[Felix.getInstance().getPos().getPosX()][Felix.getInstance().getPos().getPosY()]);

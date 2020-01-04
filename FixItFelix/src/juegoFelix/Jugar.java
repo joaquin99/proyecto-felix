@@ -61,6 +61,7 @@ public class Jugar {
 	public void derrota(){
 		//mostrar mensaje derrota
 		System.out.println("Has perdido");
+		JOptionPane.showMessageDialog(null, "Ha perdido!");
 		this.enJuego = false;
 		controladorApp.volverAlMenu();
 	}
