@@ -30,13 +30,14 @@ public class Nivel {
 	
 	ControladorJugar controladorJuego;
 
-	public Nivel(int nroNivel,double porcentajeVentana, double porcentajeTiempo,ControladorJugar controladorJuego){
+	public Nivel(int nroNivel,double porcentajeVentana, double porcentajeTiempo,ControladorJugar controladorJuego ){
 		//Ralph.getInstance();
 		this.controladorJuego = controladorJuego;
 		System.out.println("Comenzó el nivel"+nroNivel);
 		enemigos = new ArrayList<Enemigo>();
 		edificioNivel = new Edificio(porcentajeVentana, porcentajeTiempo);
 		seccionActual = 0;
+		this.nroNivel = nroNivel;
 	}
 	
 
@@ -52,7 +53,7 @@ public class Nivel {
 	/**Verdadero si Felix se quedo sin vidas o se acabo el tiempo
 	  **/
 	public boolean condicionesDerrota() {	
-		return (Felix.getInstance().getEstado().equals(EstadosFelix.GOLPEADOLADRILLO)) || (Felix.getInstance().getEstado().equals(EstadosFelix.GOLPEADOPAJARO) || (Felix.getInstance().getVidas() == 0));
+		return (Felix.getInstance().getEstado().equals(EstadosFelix.GOLPEADOLADRILLO)) || (Felix.getInstance().getEstado().equals(EstadosFelix.GOLPEADOPAJARO) || (Felix.getInstance().getVidas() <= 0));
 	}
 	
   

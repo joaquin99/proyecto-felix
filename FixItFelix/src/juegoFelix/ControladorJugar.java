@@ -58,7 +58,7 @@ public class ControladorJugar{
 	}
 	
 	public static boolean noLeQuedanVidas(){
-		return (Felix.getInstance().getVidas() == 0);
+		return (Felix.getInstance().getVidas() <= 0);
 	}
 	
 }

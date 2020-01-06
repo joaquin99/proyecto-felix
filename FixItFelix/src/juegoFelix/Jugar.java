@@ -46,7 +46,7 @@ public class Jugar {
 	*/
 	
 	public boolean noTerminaJuego(int nivel){
-		return ((nivel < NUMERO_NIVELES) &&(Felix.getInstance().getVidas() != 0));
+		return ((nivel < NUMERO_NIVELES) &&(Felix.getInstance().getVidas() > 0));
 	}
 	
 	public void victoria(){

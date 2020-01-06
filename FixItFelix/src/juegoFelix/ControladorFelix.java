@@ -36,7 +36,7 @@ public class ControladorFelix implements KeyListener{
 		
 		case KeyEvent.VK_DOWN: Felix.getInstance().setDireccion(Direccion.ABAJO); break;
 		
-		case KeyEvent.VK_V: System.out.println("Estado: "+Felix.getInstance().getEstado()); mover=false; break;
+		case KeyEvent.VK_V: System.out.println("Vidas: "+Felix.getInstance().getVidas()); mover=false; break;
 		
 		case KeyEvent.VK_SPACE: 
 			mover = false;

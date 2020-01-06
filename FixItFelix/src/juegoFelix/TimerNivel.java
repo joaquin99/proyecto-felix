@@ -12,6 +12,7 @@ import entidades.Direccion;
 import entidades.Enemigo;
 import entidades.EstadosFelix;
 import entidades.Felix;
+import entidades.Ladrillo;
 import entidades.Pajaro;
 import entidades.Ralph;
 import graficos.DibujarEdificio;
@@ -107,23 +108,16 @@ public class TimerNivel extends Timer{
 				// TODO Auto-generated method stub
 				for(Enemigo e:enemigos) {
 					
-					e.mover();
-					if(nivelActual.hayColision(Felix.getInstance().getPos(), e.getPos())) {
-						System.out.println("Felix ha sido golpeado!");
-						Felix.getInstance().daniarse(e);
-						//Para probar si así funciona, ya que parece que el enemigo sigue en el lugar haciendo daño
-						//enemigos.removeAll(enemigos);
-						//terminarTimerNivelDerrota();
-					}
-					
+					e.mover();  
 					if(!nivelActual.estaEnSeccion(e))
 						paraRemover.add(e);
 				}
+				
 				if(Math.random()*2 > 1 && (Ralph.getInstance().getPos().getPosX() > Felix.getInstance().getPos().getPosX()))
 					Ralph.getInstance().setDireccion(Direccion.IZQUIERDA);
 				else if(Ralph.getInstance().getPos().getPosX() < Felix.getInstance().getPos().getPosX())
 					Ralph.getInstance().setDireccion(Direccion.DERECHA);
-				
+
 				Ralph.getInstance().mover();
 				enemigos.removeAll(paraRemover);
 				DibujarNivel.getInstance().repaint();
@@ -184,10 +178,46 @@ public class TimerNivel extends Timer{
 			public void run() {
 				// TODO Auto-generated method stub
 				if(Math.random()*2 > 1) {
-					enemigos.add(new Pajaro(1,0,0));
+					//Se genera un pajaro
+					//enemigos.add(new Pajaro(1,0,0));
+					enemigos.add(new Pajaro(1,0,(int) (Math.random()*3)));
+					
+					//Se prueba generar ladrillos
+					//Se genera un ladrillo
+					System.out.println("Se generaron ladrillos");
+					Enemigo[] ladrillos = Ralph.getInstance().golpearEdificio(Felix.getInstance().getPos().getPosX(), 1);
+					System.out.println(Ralph.getInstance().getCantLadrillos());
+					if(ladrillos != null)
+						for(Enemigo e:ladrillos)
+							enemigos.add(e);
+				
 				}
+				System.out.println("Se generaron ladrillos");
+				Enemigo[] ladrillos = Ralph.getInstance().golpearEdificio(Felix.getInstance().getPos().getPosX(), 1);
+				System.out.println(Ralph.getInstance().getCantLadrillos());
+				if(ladrillos != null)
+					for(Enemigo e:ladrillos)
+						enemigos.add(e);
 				
 				
+			}
+			
+		};
+		
+		//Hace que el contacto con lso enemigos provoque daño, en vez de controlarlo solo cuando avanza
+		TimerTask danioEnemigos = new TimerTask(){
+			
+			//Evita que se realicen nuevos controles antes de reiniciar
+			private boolean golpeado = false;
+			
+			public void run() {
+				if(!golpeado)
+					for(int i = 0;i < enemigos.size() && !golpeado;i++)
+						if(nivelActual.hayColision(Felix.getInstance().getPos(), enemigos.get(i).getPos())) {
+							System.out.println("Felix ha sido golpeado! por "+enemigos.get(i));
+							Felix.getInstance().daniarse(enemigos.get(i));
+							golpeado = true;
+						}
 			}
 			
 		};
@@ -226,11 +256,11 @@ public class TimerNivel extends Timer{
 		System.out.println("Estado de Felix: "+Felix.getInstance().getEstado());
 		this.schedule(condicionesFinSeccion,0,10);
 		this.schedule(condicionesFinNivel,0,100);
-		this.schedule(generarEnemigos,0,SEGUNDO*20);
-		//this.schedule(generarTarta,0,1000*300);
-		this.schedule(generarTarta,0,SEGUNDO*20);
+		this.schedule(generarEnemigos,SEGUNDO*5,SEGUNDO*10);
+		this.schedule(generarTarta,SEGUNDO*20,SEGUNDO*10);
 		this.schedule(controlarInmunidad, 0,SEGUNDO);
-		this.schedule(comportamientoEnemigos,0,100);
+		this.schedule(comportamientoEnemigos,0,SEGUNDO);
+		this.schedule(danioEnemigos,0,SEGUNDO/10);
 		//this.schedule(tiempoJuego,0,1000);
 		
 	}
@@ -240,7 +270,7 @@ public class TimerNivel extends Timer{
 		enemigos.removeAll(enemigos);
 		this.cancel();
 		this.purge();
-		System.out.println("Perdiste");
+		System.out.println("Perdiste una vida ");
 		nivelActual.finDelNivel();
 	}
 	
