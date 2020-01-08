@@ -1,7 +1,9 @@
 package graficos;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
+import entidades.Felix;
 import juegoFelix.ControladorFelix;
 
 public class DibujarNivel extends JFrame{
@@ -12,6 +14,7 @@ public class DibujarNivel extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(null);
 		this.setSize(600, 600);
+
 		DibujarEdificio de=DibujarEdificio.getInstance();
 		//El controladorFelix creado en DibujarEdificio se agrega al frame
 		this.addKeyListener(DibujarEdificio.getInstance().getControlPersonaje());
@@ -20,6 +23,7 @@ public class DibujarNivel extends JFrame{
 		this.setVisible(true);
 		
 		//this.repaint();
+
 	}
 	
 	public static DibujarNivel getInstance(){
@@ -38,4 +42,5 @@ public class DibujarNivel extends JFrame{
 			INSTANCE = null;
 		}
 	}
+	
 }

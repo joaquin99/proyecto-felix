@@ -52,10 +52,12 @@ public class Jugar {
 	public void victoria(){
 		//mostrar mensaje victoria
 		System.out.println("Felicitaciones!Has ganado!");
+		System.out.println("Su puntuacion fue de "+Felix.getInstance().getPuntos());
 		jugador = new Jugador();
 		String nombreJugador = JOptionPane.showInputDialog("Ingrese su nombre:");
 		jugador.setNombre(nombreJugador);
 		jugador.setPuntos(Felix.getInstance().getPuntos());
+		controladorApp.actualizarRanking(jugador);
 		this.enJuego = false;
 		//Para intentar eliminar la ventana del juego
 		DibujarNivel.getInstance().ocultar();

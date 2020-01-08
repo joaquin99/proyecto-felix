@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import edificio.*;
@@ -25,9 +26,17 @@ public class DibujarEdificio extends JPanel{
 	private ImgTarta imgTarta;
 	private ControladorFelix controlPersonaje;
 	
+	//Prueba de mostrar info del nivel
+	JLabel vidasFelix;
+	JLabel puntosFelix;
+	
 	private static DibujarEdificio INSTANCE;
 	
 	private DibujarEdificio() {
+		
+		this.setLayout(null);
+		infoNivel();
+		
 		System.out.println("Se repite");
 		imgVentana = null; 
 		try {
@@ -196,6 +205,11 @@ public class DibujarEdificio extends JPanel{
 			else
 				g.drawImage(imgPajaro.aleteo1, enemigos.get(i).posicionGrafica(nroSeccion).getPosX(), enemigos.get(i).posicionGrafica(nroSeccion).getPosY(), null);
 		}
+		
+		//Prueba de mostrar info del jugador y el nivel
+		puntosFelix.setText("Puntos: "+Felix.getInstance().getPuntos());
+		vidasFelix.setText("Vidas: "+Felix.getInstance().getVidas());
+		
 	}
 	
 //	@Override
@@ -302,6 +316,29 @@ public class DibujarEdificio extends JPanel{
 	//Retorna el ControladorFelix. Le permite a DibujarNivel agregarlo al frame
 	public ControladorFelix getControlPersonaje() {
 		return controlPersonaje;
+	}
+	
+	//Muestra informacion sobre el estado del jugador y el nivel
+	//Todavia no aparece en pantalla
+	public void infoNivel() {
+		
+		vidasFelix = new JLabel("Prueba:"+Felix.getInstance().getVidas());
+		vidasFelix.setLocation(Felix.getInstance().posicionGrafica(0).getPosX(),Felix.getInstance().posicionGrafica(0).getPosY());
+		puntosFelix = new JLabel("Prueba"+Felix.getInstance().getPuntos());
+		puntosFelix.setLocation(3000,1000);
+		System.out.println("Se inicio la info");
+		this.add(vidasFelix);
+		
+		this.add(puntosFelix);
+	}
+	
+	public void actualizarDatos() {
+		if(vidasFelix != null) {
+			vidasFelix.setText("Vidas: "+Felix.getInstance().getVidas());
+		}
+		if(puntosFelix != null) {
+			puntosFelix.setText("Vidas: "+Felix.getInstance().getPuntos());
+		}
 	}
 	
 }

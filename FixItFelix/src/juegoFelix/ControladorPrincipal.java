@@ -24,6 +24,10 @@ public class ControladorPrincipal{
 		System.out.println("Acaba de cerrar la aplicacion");
 		System.exit(0);
 	}
+	
+	public void actualizarRanking(Jugador nuevoJugador) {
+		menu.actualizarRanking(nuevoJugador);
+	}
 
 }
 /*

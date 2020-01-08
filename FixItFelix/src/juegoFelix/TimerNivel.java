@@ -21,7 +21,6 @@ import graficos.DibujarNivel;
 import java.math.*;
 
 
-
 public class TimerNivel extends Timer{
 
 	private final int SEGUNDO = 1000;
@@ -181,6 +180,7 @@ public class TimerNivel extends Timer{
 					//Se genera un pajaro
 					//enemigos.add(new Pajaro(1,0,0));
 					enemigos.add(new Pajaro(1,0,(int) (Math.random()*3)));
+					System.out.println("Se ha generado un enemigo en ("+enemigos.get(enemigos.size()-1).getPos().getPosX()+","+enemigos.get(enemigos.size()-1).getPos().getPosY()+")");
 					
 					//Se prueba generar ladrillos
 					//Se genera un ladrillo

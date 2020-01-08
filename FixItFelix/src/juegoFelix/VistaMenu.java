@@ -224,7 +224,6 @@ public class VistaMenu{
                 frame.setBounds(100,100,dimXRanking,dimYRanking);
                 frame.add(panelComoJugar,BorderLayout.CENTER);
                 frame.repaint();
-                accederModeloTabla.actualizarRanking("Brian", 100,datos);
                 
             }
         });
@@ -237,7 +236,6 @@ public class VistaMenu{
                 //contadorJugar++;
                 datos.contadorJugado++;
                 vecesQueSeJugo.setText("Veces que se eligio jugar: "+datos.contadorJugado);
-                accederModeloTabla.actualizarRanking("Gabriel", 120,datos);
                 
                 //Pasa al juego
                 controladorApp.iniciarJuego();
@@ -330,7 +328,7 @@ public class VistaMenu{
     }
     
     private void iniciarPanelComoJugar() {
-        panelComoJugar = new JPanel(){};
+        panelComoJugar = new JPanel();
         panelComoJugar.setLayout(new BorderLayout());
         
         titulo = new JLabel("Fix It Felix");
@@ -459,5 +457,9 @@ public class VistaMenu{
         
         frame.add(panelConfiguracion);
     
+    }
+    
+    public void actualizarRanking(Jugador nuevoJugador) {
+    	accederModeloTabla.actualizarRanking(nuevoJugador.getNombre(), nuevoJugador.getPuntos(), datos);
     }
 }
