@@ -264,6 +264,7 @@ public class VistaMenu{
         btnEstadistica.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //Carga el panelMenu del top 5
+            	actualizarEstadistica();
                 frame.remove(panelMenu);
                 frame.setBounds(100,100,dimXRanking,dimYRanking);
                 frame.add(panelEstadistica,BorderLayout.CENTER);
@@ -461,5 +462,12 @@ public class VistaMenu{
     
     public void actualizarRanking(Jugador nuevoJugador) {
     	accederModeloTabla.actualizarRanking(nuevoJugador.getNombre(), nuevoJugador.getPuntos(), datos);
+    }
+    
+    private void actualizarEstadistica() {
+    	if(cantJugadores != null && vecesIniciado != null) {
+    		cantJugadores.setText("Jugadores que entraron en el ranking: "+datos.contadorJugadores);
+    		vecesIniciado.setText("Veces que se inicio el juego: "+datos.contadorIniciado);
+    	}
     }
 }

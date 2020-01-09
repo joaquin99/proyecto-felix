@@ -112,12 +112,16 @@ public class TimerNivel extends Timer{
 						paraRemover.add(e);
 				}
 				
-				if(Math.random()*2 > 1 && (Ralph.getInstance().getPos().getPosX() > Felix.getInstance().getPos().getPosX()))
+				if(Math.random()*2 > 1 && (Ralph.getInstance().getPos().getPosX() > Felix.getInstance().getPos().getPosX())) {
 					Ralph.getInstance().setDireccion(Direccion.IZQUIERDA);
-				else if(Ralph.getInstance().getPos().getPosX() < Felix.getInstance().getPos().getPosX())
+				}
+				else if(Ralph.getInstance().getPos().getPosX() < Felix.getInstance().getPos().getPosX() && Ralph.getInstance().getPos().getPosX() < 4) {
 					Ralph.getInstance().setDireccion(Direccion.DERECHA);
-
+	
+				}
 				Ralph.getInstance().mover();
+				
+				System.out.println("Posicion Ralph: ("+Ralph.getInstance().getPos().getPosX()+","+Ralph.getInstance().getPos().getPosY()+")");
 				enemigos.removeAll(paraRemover);
 				DibujarNivel.getInstance().repaint();
 			}	
