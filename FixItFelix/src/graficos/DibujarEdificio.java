@@ -342,8 +342,6 @@ public class DibujarEdificio extends JPanel{
 		}
 	}
 	
-	
-	
 	public void setTiempoNivel(int tiempo) {
 			tiempoRestante = tiempo;
 			tiempoNivel.setText("Tiempo :"+tiempoRestante);

@@ -73,7 +73,7 @@ public class TimerNivel extends Timer{
 					Felix.getInstance().posInicial();
 					DibujarEdificio.getInstance().actualizar(edificioNivel.getSeccion(seccionActual).getMatrizVentanas(),seccionActual, enemigos);
 					DibujarEdificio.getInstance().repaint();
-					//nivelActual.terminar();
+					nivelActual.subirSeccion();
 				}
 			}
 			

@@ -113,6 +113,11 @@ public class Nivel {
 		return tiempoRestante;
 	}
 	
+	public void subirSeccion() {
+		if(this.seccionActual < 2)
+			this.seccionActual++;
+	}
+	
 	//Evalua si pudo ganar
 	public boolean ganoNivel() {
 		
