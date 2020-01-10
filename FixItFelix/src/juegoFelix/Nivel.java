@@ -9,6 +9,7 @@ import entidades.Pajaro;
 import entidades.Posicion;
 import entidades.Ralph;
 import graficos.DibujarEdificio;
+import graficos.DibujarNivel;
 import juegoFelix.Edificio;
 import juegoFelix.MainJuego;
 import juegoFelix.Seccion;
@@ -38,6 +39,7 @@ public class Nivel {
 		seccionActual = 0;
 		this.nroNivel = nroNivel;
 		tiempoRestante = 100 - 5*nroNivel;
+		
 	}
 	
 
@@ -105,6 +107,10 @@ public class Nivel {
 		else
 			return false;
 				
+	}
+	
+	public int getTiempoRestante() {
+		return tiempoRestante;
 	}
 	
 	//Evalua si pudo ganar

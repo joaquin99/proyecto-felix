@@ -12,12 +12,20 @@ public abstract class PorcentajeAumento {
 	}
 	
 	//Calcula aumento del 10 por ciento en entero
-	public static int calcularAumento(int base,int n) {
+	public static int calcularAumento(int base, int n) {
 		int resultado = base;
 		for(int i = 1;i <= n;i++) {
 			resultado = redondear((double)(resultado + 0.1*resultado));
 		}
 		return resultado;
+	}
+	
+	public static int calcularDisminucion(int base, int n) {
+			double resultado = base;
+			for(int i = 1;i <= n;i++) {
+				resultado = (double)(resultado - 0.1*resultado);
+			}
+			return redondear(resultado);
 	}
 
 }

@@ -42,6 +42,9 @@ public class TimerNivel extends Timer{
 		this.nivelActual = nivelActual;
 		DibujarEdificio.getInstance().actualizar(edificioNivel.getSeccion(seccionActual).getMatrizVentanas(),seccionActual, enemigos);
 		DibujarNivel.getInstance();
+		DibujarEdificio.getInstance().setTiempoNivel(nivelActual.getTiempoRestante());
+		DibujarEdificio.getInstance().setNroNivelActual(nivelActual.nroNivel);
+		
 		System.out.println("Comenzó el nivel");
 		
 		//Disminuye el tiempo para terminar el nivel cada un segundo
@@ -49,6 +52,7 @@ public class TimerNivel extends Timer{
 		
 			public void run() {
 				nivelActual.disminuirTiempo();
+				DibujarEdificio.getInstance().actualizarTiempo();
 			}
 			
 		};
@@ -196,17 +200,9 @@ public class TimerNivel extends Timer{
 					//enemigos.add(new Pajaro(1,0,0));
 					enemigos.add(new Pajaro(1,0,(int) (Math.random()*3)));
 					System.out.println("Se ha generado un enemigo en ("+enemigos.get(enemigos.size()-1).getPos().getPosX()+","+enemigos.get(enemigos.size()-1).getPos().getPosY()+")");
-					
-					//Se prueba generar ladrillos
-					//Se genera un ladrillo
-					System.out.println("Se generaron ladrillos");
-					Enemigo[] ladrillos = Ralph.getInstance().golpearEdificio(Felix.getInstance().getPos().getPosX(), 1);
-					System.out.println(Ralph.getInstance().getCantLadrillos());
-					if(ladrillos != null)
-						for(Enemigo e:ladrillos)
-							enemigos.add(e);
 				
 				}
+				/*
 				System.out.println("Se generaron ladrillos");
 				Enemigo[] ladrillos = Ralph.getInstance().golpearEdificio(Felix.getInstance().getPos().getPosX(), 1);
 				System.out.println(Ralph.getInstance().getCantLadrillos());
@@ -214,12 +210,23 @@ public class TimerNivel extends Timer{
 					for(Enemigo e:ladrillos)
 						enemigos.add(e);
 				
-				
+				*/
 			}
 			
 		};
 		
-		//Hace que el contacto con lso enemigos provoque daño, en vez de controlarlo solo cuando avanza
+		TimerTask lanzamientoLadrillos = new TimerTask(){
+			public void run() {
+				System.out.println("Se generaron ladrillos");
+				Enemigo[] ladrillos = Ralph.getInstance().golpearEdificio(Felix.getInstance().getPos().getPosX(), 1);
+				System.out.println(Ralph.getInstance().getCantLadrillos());
+				if(ladrillos != null)
+					for(Enemigo e:ladrillos)
+						enemigos.add(e);
+			}
+		};
+		
+		//Hace que el contacto con los enemigos provoque daño, en vez de controlarlo solo cuando avanza
 		TimerTask danioEnemigos = new TimerTask(){
 			
 			//Evita que se realicen nuevos controles antes de reiniciar
@@ -278,6 +285,7 @@ public class TimerNivel extends Timer{
 		this.schedule(comportamientoEnemigos,0,SEGUNDO);
 		this.schedule(danioEnemigos,0,SEGUNDO/10);
 		this.schedule(tiempoJuego,0,SEGUNDO);
+		this.schedule(lanzamientoLadrillos,SEGUNDO*5,PorcentajeAumento.calcularDisminucion(SEGUNDO*10, nivelActual.nroNivel-1));
 		
 	}
 	

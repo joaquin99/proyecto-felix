@@ -1,6 +1,7 @@
 package graficos;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Label;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -29,13 +30,15 @@ public class DibujarEdificio extends JPanel{
 	//Prueba de mostrar info del nivel
 	JLabel vidasFelix;
 	JLabel puntosFelix;
+	JLabel tiempoNivel;
+	int tiempoRestante;
+	JLabel nroNivelActual;
 	
 	private static DibujarEdificio INSTANCE;
 	
 	private DibujarEdificio() {
 		
-		this.setLayout(null);
-		infoNivel();
+		//this.setLayout(null);
 		
 		System.out.println("Se repite");
 		imgVentana = null; 
@@ -207,8 +210,7 @@ public class DibujarEdificio extends JPanel{
 		}
 		
 		//Prueba de mostrar info del jugador y el nivel
-		puntosFelix.setText("Puntos: "+Felix.getInstance().getPuntos());
-		vidasFelix.setText("Vidas: "+Felix.getInstance().getVidas());
+		actualizarDatos();
 		
 	}
 	
@@ -320,16 +322,15 @@ public class DibujarEdificio extends JPanel{
 	
 	//Muestra informacion sobre el estado del jugador y el nivel
 	//Todavia no aparece en pantalla
-	public void infoNivel() {
+	public void setInfoNivel(JLabel vidas,JLabel puntos,JLabel tiempo,JLabel nroNivel) {
 		
-		vidasFelix = new JLabel("Prueba:"+Felix.getInstance().getVidas());
-		vidasFelix.setLocation(Felix.getInstance().posicionGrafica(0).getPosX(),Felix.getInstance().posicionGrafica(0).getPosY());
-		puntosFelix = new JLabel("Prueba"+Felix.getInstance().getPuntos());
-		puntosFelix.setLocation(3000,1000);
+		vidasFelix = vidas;
+		puntosFelix = puntos;
+		tiempoNivel = tiempo;
+		nroNivelActual = nroNivel;
+		
 		System.out.println("Se inicio la info");
-		this.add(vidasFelix);
 		
-		this.add(puntosFelix);
 	}
 	
 	public void actualizarDatos() {
@@ -337,10 +338,26 @@ public class DibujarEdificio extends JPanel{
 			vidasFelix.setText("Vidas: "+Felix.getInstance().getVidas());
 		}
 		if(puntosFelix != null) {
-			puntosFelix.setText("Vidas: "+Felix.getInstance().getPuntos());
+			puntosFelix.setText("Puntos: "+Felix.getInstance().getPuntos());
 		}
 	}
 	
+	
+	
+	public void setTiempoNivel(int tiempo) {
+			tiempoRestante = tiempo;
+			tiempoNivel.setText("Tiempo :"+tiempoRestante);
+
+	}
+	
+	public void actualizarTiempo() {
+		tiempoRestante--;
+		tiempoNivel.setText("Tiempo: "+tiempoRestante);
+	}
+	
+	public void setNroNivelActual(int nroNivel) {
+		nroNivelActual.setText("Nivel: "+nroNivel);
+	}
 }
 /*
 */
