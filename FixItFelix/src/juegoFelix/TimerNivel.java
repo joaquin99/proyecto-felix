@@ -74,6 +74,8 @@ public class TimerNivel extends Timer{
 					DibujarEdificio.getInstance().actualizar(edificioNivel.getSeccion(seccionActual).getMatrizVentanas(),seccionActual, enemigos);
 					DibujarEdificio.getInstance().repaint();
 					nivelActual.subirSeccion();
+					//El ultimo panel da 400 puntos mas que el resto
+					Felix.getInstance().setPuntos(Felix.getInstance().getPuntos()+400);
 				}
 			}
 			
