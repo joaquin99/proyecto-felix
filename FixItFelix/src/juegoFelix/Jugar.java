@@ -24,7 +24,7 @@ public class Jugar {
 		controladorJuego = new ControladorJugar(nroNivel,this);
 		jugador = new Jugador();
 		Felix.getInstance().reiniciar();
-		Nivel nivel = new Nivel(nroNivel,(AUMENTO_VENTANAS * (nroNivel+1)), AUMENTO_TIEMPO * (nroNivel+1),this.controladorJuego);
+		Nivel nivel = new Nivel(nroNivel,(AUMENTO_VENTANAS * (nroNivel+1)),this.controladorJuego);
 		nivel.iniciar();
 		
 	}

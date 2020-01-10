@@ -13,7 +13,7 @@ public class Edificio {
 	public Edificio() {}
 	
 	//Constructor de nivel
-	public Edificio(Double porcentaje, double porcentajeTiempo) {
+	public Edificio(Double porcentaje) {
 
 		this.cantVentanasConObstaculos = (int)(ANCHO*ALTURA*porcentaje);
 		this.cantVentanasRotas = (int)(ANCHO*ALTURA*porcentaje);

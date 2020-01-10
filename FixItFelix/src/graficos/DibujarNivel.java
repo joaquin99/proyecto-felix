@@ -33,12 +33,9 @@ public class DibujarNivel extends JFrame{
 		
 		JLabel puntosFelix = new JLabel("Puntos: "+Felix.getInstance().getPuntos());
 		infoFelix.add(puntosFelix);
-		puntosFelix.setLocation(100,100);
-		infoFelix.setComponentZOrder(puntosFelix, 0);
 		
 		JLabel vidasFelix = new JLabel("Puntos: "+Felix.getInstance().getVidas());
 		infoFelix.add(vidasFelix);
-		puntosFelix.setLocation(0,0);
 		infoFelix.setComponentZOrder(vidasFelix, 0);
 		
 		JLabel tiempoNivel = new JLabel();

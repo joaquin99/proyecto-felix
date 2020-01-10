@@ -19,10 +19,10 @@ public class ControladorJugar{
 	
 	
 	public void TerminarNivel(Nivel nivelActual) {
-		if(ganoNivel(nivelActual) && nroNivel != (TOTAL_NIVELES-1)) {
+		if(ganoNivel(nivelActual) && nroNivel != (TOTAL_NIVELES)) {
 			System.out.println("Felicidades, superaste el nivel "+nroNivel);
 			this.nroNivel++;
-			Nivel nivel = new Nivel(nroNivel,(Jugar.AUMENTO_VENTANAS * (nroNivel+1)), Jugar.AUMENTO_TIEMPO * (nroNivel+1),this);
+			Nivel nivel = new Nivel(nroNivel,(Jugar.AUMENTO_VENTANAS * (nroNivel+1)),this);
 			nivel.iniciar();
 			//Si no consigue pasar
 		}
@@ -33,7 +33,7 @@ public class ControladorJugar{
 				
 			}
 			//Gano el juego
-			else if(ganoNivel(nivelActual) && nroNivel == (TOTAL_NIVELES-1)) {
+			else if(ganoNivel(nivelActual) && nroNivel == (TOTAL_NIVELES)) {
 				System.out.println("Ha ganado el juego");
 				jugar.victoria();
 			}

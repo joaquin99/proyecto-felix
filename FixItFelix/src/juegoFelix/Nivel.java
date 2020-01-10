@@ -30,16 +30,15 @@ public class Nivel {
 	
 	ControladorJugar controladorJuego;
 
-	public Nivel(int nroNivel,double porcentajeVentana, double porcentajeTiempo,ControladorJugar controladorJuego ){
+	public Nivel(int nroNivel,double porcentajeVentana,ControladorJugar controladorJuego ){
 		//Ralph.getInstance();
 		this.controladorJuego = controladorJuego;
 		System.out.println("Comenzó el nivel"+nroNivel);
 		enemigos = new ArrayList<Enemigo>();
-		edificioNivel = new Edificio(porcentajeVentana, porcentajeTiempo);
+		edificioNivel = new Edificio(porcentajeVentana);
 		seccionActual = 0;
 		this.nroNivel = nroNivel;
 		tiempoRestante = 100 - 5*nroNivel;
-		
 	}
 	
 
@@ -85,7 +84,7 @@ public class Nivel {
 		Felix.getInstance().posInicial();
 		Ralph.getInstance().reiniciar();
 		//Prueba para que genere las secciones (de lo contrario llama al constructor vacio)
-		edificioNivel = new Edificio(0.5,0.5);
+		edificioNivel = new Edificio(0.5);
 		//El iniciar secciones ya se hizo en el constructor
 		//edificioNivel.iniciarSecciones();
 		timer = new TimerNivel(this,edificioNivel);
