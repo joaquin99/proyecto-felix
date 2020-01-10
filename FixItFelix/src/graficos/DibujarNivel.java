@@ -20,6 +20,7 @@ public class DibujarNivel extends JFrame{
 		this.addKeyListener(DibujarEdificio.getInstance().getControlPersonaje());
 		System.out.println(de.getComponentCount());
 		this.add(de);
+		this.setResizable(false);
 		this.setVisible(true);
 		
 		//this.repaint();

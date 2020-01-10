@@ -17,16 +17,15 @@ public class Nivel {
 
 	TimerNivel timer;
 	
-	
 	private int seccionActual;
 	
 	private ArrayList<Enemigo> enemigos;
 	private Edificio edificioNivel;
 	
-	int turnos = 0;
 	int frecuenciaPajaros = 30;
 	int frecuenciaGolpesRalph = 5;
 	int nroNivel;
+	private int tiempoRestante;
 	
 	ControladorJugar controladorJuego;
 
@@ -38,6 +37,7 @@ public class Nivel {
 		edificioNivel = new Edificio(porcentajeVentana, porcentajeTiempo);
 		seccionActual = 0;
 		this.nroNivel = nroNivel;
+		tiempoRestante = 100 - 5*nroNivel;
 	}
 	
 
@@ -69,6 +69,7 @@ public class Nivel {
   }
 
 	public void reiniciar(){
+		System.out.println("Se reinicia en la seccion "+seccionActual);
 		for(int i = seccionActual; i < Edificio.getSecciones(); i++)
 			edificioNivel.getSeccion(i).iniciarSeccion(i);
 		//Agregada para ver qué ocurre
@@ -88,17 +89,23 @@ public class Nivel {
 		timer = new TimerNivel(this,edificioNivel);
 		
 	}
-	/*
-	//Termina la ejecucion del timer
-	public void terminar() {
-		if(timer != null) {
-			timer.cancel();
-			timer.purge();
-			//Provoca un NullPointerException
-			controladorJuego.TerminarNivel(this);
+	
+	//Disminuye en 1 segundo el tiempo para terminar el nivel
+	public void disminuirTiempo() {
+		if(tiempoRestante != 0) {
+			tiempoRestante--;
+			System.out.println("Tiempo restante: "+tiempoRestante+" segundos");
 		}
 	}
-	*/
+	
+	//Retorna true si se termino el tiempo
+	public boolean tiempoTerminado() {
+		if(tiempoRestante == 0)
+			return true;
+		else
+			return false;
+				
+	}
 	
 	//Evalua si pudo ganar
 	public boolean ganoNivel() {

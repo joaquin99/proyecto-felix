@@ -19,7 +19,7 @@ public class ControladorJugar{
 	
 	
 	public void TerminarNivel(Nivel nivelActual) {
-		if(ganoNivel() && nroNivel != (TOTAL_NIVELES-1)) {
+		if(ganoNivel(nivelActual) && nroNivel != (TOTAL_NIVELES-1)) {
 			System.out.println("Felicidades, superaste el nivel "+nroNivel);
 			this.nroNivel++;
 			Nivel nivel = new Nivel(nroNivel,(Jugar.AUMENTO_VENTANAS * (nroNivel+1)), Jugar.AUMENTO_TIEMPO * (nroNivel+1),this);
@@ -27,17 +27,17 @@ public class ControladorJugar{
 			//Si no consigue pasar
 		}
 		else {
-			if(noLeQuedanVidas()) {
+			if(noLeQuedanVidas()|| nivelActual.tiempoTerminado()) {
 				System.out.println("Ha perdido");
 				jugar.derrota();
 				
 			}
 			//Gano el juego
-			else if(ganoNivel() && nroNivel == (TOTAL_NIVELES-1)) {
+			else if(ganoNivel(nivelActual) && nroNivel == (TOTAL_NIVELES-1)) {
 				System.out.println("Ha ganado el juego");
 				jugar.victoria();
 			}
-			else if(!ganoNivel()){
+			else if(!ganoNivel(nivelActual)){
 				
 				System.out.println("Has perdido una vida");
 				
@@ -53,8 +53,8 @@ public class ControladorJugar{
 		}
 	}
 	
-	public static boolean ganoNivel(){
-		return (Felix.getInstance().getEstado().equals(EstadosFelix.INMUNE) || Felix.getInstance().getEstado().equals(EstadosFelix.NORMAL));
+	public static boolean ganoNivel(Nivel nivel){
+		return ((Felix.getInstance().getEstado().equals(EstadosFelix.INMUNE) || Felix.getInstance().getEstado().equals(EstadosFelix.NORMAL)) && (!nivel.tiempoTerminado()));
 	}
 	
 	public static boolean noLeQuedanVidas(){

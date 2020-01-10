@@ -30,6 +30,8 @@ public class TimerNivel extends Timer{
 	private Nivel nivelActual;
 	//cantidad de secciones
 	private final int NUM_SECCIONES = 3;
+	
+	
 	ArrayList<Enemigo> enemigos = new ArrayList<Enemigo>();
 	
 	public TimerNivel(Nivel nivelActual,Edificio edificioNivel) {
@@ -41,6 +43,15 @@ public class TimerNivel extends Timer{
 		DibujarEdificio.getInstance().actualizar(edificioNivel.getSeccion(seccionActual).getMatrizVentanas(),seccionActual, enemigos);
 		DibujarNivel.getInstance();
 		System.out.println("Comenzó el nivel");
+		
+		//Disminuye el tiempo para terminar el nivel cada un segundo
+		TimerTask tiempoJuego = new TimerTask() {
+		
+			public void run() {
+				nivelActual.disminuirTiempo();
+			}
+			
+		};
 		
 		
 		//Controla si se ha superado la sección actual
@@ -72,7 +83,7 @@ public class TimerNivel extends Timer{
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				if(nivelActual.condicionesDerrota()){
+				if(nivelActual.condicionesDerrota()|| nivelActual.tiempoTerminado()){
 					//nivelActual.terminar();
 					/*
 					cancel();
@@ -227,6 +238,7 @@ public class TimerNivel extends Timer{
 		};
 		
 		
+		
 		/*
 		TimerTask tiempoJuego = new TimerTask(){
 			
@@ -265,7 +277,7 @@ public class TimerNivel extends Timer{
 		this.schedule(controlarInmunidad, 0,SEGUNDO);
 		this.schedule(comportamientoEnemigos,0,SEGUNDO);
 		this.schedule(danioEnemigos,0,SEGUNDO/10);
-		//this.schedule(tiempoJuego,0,1000);
+		this.schedule(tiempoJuego,0,SEGUNDO);
 		
 	}
 	

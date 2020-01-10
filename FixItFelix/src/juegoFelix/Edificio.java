@@ -6,8 +6,6 @@ public class Edificio {
 	private static final int SECCIONES = 3;
 	private static final int ALTURA = Seccion.getAlto()*SECCIONES;
 	
-	
-	
 	private int cantVentanasConObstaculos;
 	private int cantVentanasRotas;
 	private Seccion []secciones;
