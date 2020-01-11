@@ -85,8 +85,6 @@ public class Nivel {
 		Ralph.getInstance().reiniciar();
 		//Prueba para que genere las secciones (de lo contrario llama al constructor vacio)
 		edificioNivel = new Edificio(0.5);
-		//El iniciar secciones ya se hizo en el constructor
-		//edificioNivel.iniciarSecciones();
 		timer = new TimerNivel(this,edificioNivel);
 		
 	}
@@ -119,6 +117,11 @@ public class Nivel {
 	
 	public void volverAPrimeraSeccion() {
 		this.seccionActual = 0;
+	}
+	
+	public int getSeccionActual() {
+		
+		return this.seccionActual;
 	}
 	
 	//Evalua si pudo ganar

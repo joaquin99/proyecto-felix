@@ -26,7 +26,7 @@ public class TimerNivel extends Timer{
 	private final int SEGUNDO = 1000;
 	
 	int tiempoTotal = 10;
-	int seccionActual = 0;
+	//int seccionActual = 0;
 	private Nivel nivelActual;
 	//cantidad de secciones
 	private final int NUM_SECCIONES = 3;
@@ -40,7 +40,7 @@ public class TimerNivel extends Timer{
 		//Da un error en ejecucion al hacer getSeccion. Parece que no se crean
 		//this.controlFelix = controlFelix;
 		this.nivelActual = nivelActual;
-		DibujarEdificio.getInstance().actualizar(edificioNivel.getSeccion(seccionActual).getMatrizVentanas(),seccionActual, enemigos);
+		DibujarEdificio.getInstance().actualizar(edificioNivel.getSeccion(nivelActual.getSeccionActual()).getMatrizVentanas(),nivelActual.getSeccionActual(), enemigos);
 		DibujarNivel.getInstance();
 		DibujarEdificio.getInstance().setTiempoNivel(nivelActual.getTiempoRestante());
 		DibujarEdificio.getInstance().setNroNivelActual(nivelActual.nroNivel);
@@ -65,15 +65,15 @@ public class TimerNivel extends Timer{
 			public void run() {
 				// TODO Auto-generated method stub
 				//Si se gana la seccion	
-				if(edificioNivel.getSeccion(seccionActual).condicionVictoriaSeccion() && seccionActual < (NUM_SECCIONES-1)){
-					seccionActual++;
-					System.out.println("Usted ha subido a la seccion " + seccionActual);
+				if(edificioNivel.getSeccion(nivelActual.getSeccionActual()).condicionVictoriaSeccion() && nivelActual.getSeccionActual() < (NUM_SECCIONES-1)){
+					nivelActual.subirSeccion();
+					//seccionActual++;
+					System.out.println("Usted ha subido a la seccion " + nivelActual.getSeccionActual());
 					while(enemigos.size() != 0)
 						enemigos.remove(0);
 					Felix.getInstance().posInicial();
-					DibujarEdificio.getInstance().actualizar(edificioNivel.getSeccion(seccionActual).getMatrizVentanas(),seccionActual, enemigos);
+					DibujarEdificio.getInstance().actualizar(edificioNivel.getSeccion(nivelActual.getSeccionActual()).getMatrizVentanas(),nivelActual.getSeccionActual(), enemigos);
 					DibujarEdificio.getInstance().repaint();
-					nivelActual.subirSeccion();
 					//El ultimo panel da 400 puntos mas que el resto
 					Felix.getInstance().setPuntos(Felix.getInstance().getPuntos()+400);
 				}
@@ -93,7 +93,7 @@ public class TimerNivel extends Timer{
 
 					terminarTimerNivelDerrota();
 				}
-				else if((edificioNivel.getSeccion(seccionActual).condicionVictoriaSeccion()) && (seccionActual == 2)) {
+				else if((edificioNivel.getSeccion(nivelActual.getSeccionActual()).condicionVictoriaSeccion()) && (nivelActual.getSeccionActual() == 2)) {
 
 					terminarTimerNivelVictoria();
 				}
@@ -139,7 +139,7 @@ public class TimerNivel extends Timer{
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				Ventana[][] ventanasSeccion = edificioNivel.getSeccion(seccionActual).getMatrizVentanas();
+				Ventana[][] ventanasSeccion = edificioNivel.getSeccion(nivelActual.getSeccionActual()).getMatrizVentanas();
 				boolean tartaGenerada = false;
 				for(int i = 0;i < ventanasSeccion.length && !tartaGenerada;i++) {
 					for(int j = 0;j < ventanasSeccion[i].length && !tartaGenerada;j++)
@@ -189,7 +189,7 @@ public class TimerNivel extends Timer{
 					//enemigos.add(new Pajaro(1,0,0));
 					enemigos.add(new Pajaro(1,0,(int) (Math.random()*3)));
 					System.out.println("Se ha generado un enemigo en ("+enemigos.get(enemigos.size()-1).getPos().getPosX()+","+enemigos.get(enemigos.size()-1).getPos().getPosY()+")");
-					DibujarEdificio.getInstance().actualizar(edificioNivel.getSeccion(seccionActual).getMatrizVentanas(),seccionActual, enemigos);
+					DibujarEdificio.getInstance().actualizar(edificioNivel.getSeccion(nivelActual.getSeccionActual()).getMatrizVentanas(),nivelActual.getSeccionActual(), enemigos);
 				}
 			}
 			
@@ -218,9 +218,9 @@ public class TimerNivel extends Timer{
 						if(nivelActual.hayColision(Felix.getInstance().getPos(), enemigos.get(i).getPos())) {
 							System.out.println("Felix ha sido golpeado! por "+enemigos.get(i));
 							Felix.getInstance().daniarse(enemigos.get(i));
-							if(enemigos.get(i).daniar().equals(EstadosFelix.GOLPEADOLADRILLO)) {
+							/*if(enemigos.get(i).daniar().equals(EstadosFelix.GOLPEADOLADRILLO)) {
 								seccionActual = 0;
-							}
+							}*/
 							golpeado = true;
 						}
 			}

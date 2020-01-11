@@ -112,7 +112,6 @@ public class DibujarEdificio extends JPanel{
 	
 	public void dibujar(Graphics g){
 		
-		//DibujarNivel.getInstance().addKeyListener(controladorFelix);
 		switch (nroSeccion) { //Va a dibujar una version del edificio dependiendo de la seccion
 		
 		case 0:
@@ -134,7 +133,7 @@ public class DibujarEdificio extends JPanel{
 	
 		for(int i = 0; i < 3; i++) {//Con los cambios en el if, evita dibujar las ventanas centrales en las primeras dos filas en la primer seccion
 			for(int j = 0; j < 5; j++){
-			//DibujarVentana ventana = null;
+			
 				if(nroSeccion == 0){
 					if ((j == 2)&&(i == 0)){
 						g.drawImage(quePuertaEs(ventanas[j][i]),128,244, null);	
@@ -251,7 +250,6 @@ public class DibujarEdificio extends JPanel{
 	@Override
 	public void paintComponents(Graphics g) {
 		// TODO Auto-generated method stub
-		//DibujarNivel.getInstance().addKeyListener(controlPersonaje);
 		super.paintComponents(g);
 		dibujar(g);
 	}
@@ -313,7 +311,6 @@ public class DibujarEdificio extends JPanel{
 	}
 	
 	//Muestra informacion sobre el estado del jugador y el nivel
-	//Todavia no aparece en pantalla
 	public void setInfoNivel(JLabel vidas,JLabel puntos,JLabel tiempo,JLabel nroNivel) {
 		
 		vidasFelix = vidas;

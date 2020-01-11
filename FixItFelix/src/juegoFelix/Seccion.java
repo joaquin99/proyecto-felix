@@ -41,8 +41,8 @@ public class Seccion {
 		for(int i = 0; i < ALTURA; i++){
 			for(int j = 0; j < ANCHO; j++){
 				aleatorioVRotas = Math.random();
-				//aleatorioObstaculos = Math.random();
-				aleatorioObstaculos = 1;
+				aleatorioObstaculos = Math.random();
+				//aleatorioObstaculos = 1;
 				aleatorioObstaculoConHoja = Math.random();
 				estaArreglado = !(aleatorioVRotas < (auxCVR/auxCTV));
 				tieneObstaculo = (aleatorioObstaculos < (auxCVO/auxCTV));

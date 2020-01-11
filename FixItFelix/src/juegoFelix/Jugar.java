@@ -33,18 +33,6 @@ public class Jugar {
 		return this.jugador;
 	}
 	
-	/*
-	public static boolean ganoNivel(){
-		return (Felix.getInstance().getEstado().equals(EstadosFelix.INMUNE) || Felix.getInstance().getEstado().equals(EstadosFelix.NORMAL));
-	}
-	*/
-	
-	/*
-	public static boolean noLeQuedanVidas(){
-		return (Felix.getInstance().getVidas() == 0);
-	}
-	*/
-	
 	public boolean noTerminaJuego(int nivel){
 		return ((nivel < NUMERO_NIVELES) &&(Felix.getInstance().getVidas() > 0));
 	}

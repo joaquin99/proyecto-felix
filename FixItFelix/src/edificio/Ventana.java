@@ -143,25 +143,6 @@ public abstract class Ventana {
 					setEstaArreglado(true);
 			}
 		}
-		
-		/*
-		int indiceActual = 0;
-		boolean fix = false;
-		boolean secondFix = false;
-		
-		for(int i = 0;(!(secondFix) && (i < cantPaneles)); i++){		//Evalúo todos los paneles del arreglo hasta encontrar 2 no sanos o hasta llegar al último
-			if(!paneles[i].getEstado().equals(EstadosPanel.SANO)){	//Si el estado es SANO no entra, caso contrario entra 
-				if(!fix){											//Si aun no se hizo el primer arreglo, arregla el panel 
-					setPuntos(paneles[i].getPuntos());				//El panel devuelve sus puntos a ventana
-					paneles[i].arreglarPanel();
-					fix = true;
-					indiceActual = i;
-				}
-				else												//En caso de que haya hecho el 1er arreglo, significa que queda al menos un panel por reparar
-					secondFix = true;
-			}
-		}
-		if((!secondFix)&&(paneles[indiceActual].getEstado().equals(EstadosPanel.SANO)))	//Si no hace falta un 2do arreglo, la ventana estará arreglada
-			setEstaArreglado(true);*/
+
 	}
 }

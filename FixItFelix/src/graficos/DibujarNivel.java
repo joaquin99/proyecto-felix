@@ -29,7 +29,6 @@ public class DibujarNivel extends JFrame{
 		infoFelix.setSize(200,200);
 		infoFelix.setLocation(0,500);
 		add(infoFelix);
-		//this.setComponentZOrder(infoFelix, 0);
 		
 		JLabel puntosFelix = new JLabel("Puntos: "+Felix.getInstance().getPuntos());
 		infoFelix.add(puntosFelix);
