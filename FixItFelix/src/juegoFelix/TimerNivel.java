@@ -90,24 +90,11 @@ public class TimerNivel extends Timer{
 			public void run() {
 				// TODO Auto-generated method stub
 				if(nivelActual.condicionesDerrota()|| nivelActual.tiempoTerminado()){
-					//nivelActual.terminar();
-					/*
-					cancel();
-					purge();
-					System.out.println("Perdiste");
-					nivelActual.finDelNivel();
-					*/
+
 					terminarTimerNivelDerrota();
 				}
 				else if((edificioNivel.getSeccion(seccionActual).condicionVictoriaSeccion()) && (seccionActual == 2)) {
-				
-					//nivelActual.terminar();
-					/*
-					cancel();
-					purge();
-					System.out.println("Ganaste el nivel!");
-					nivelActual.finDelNivel();
-					*/
+
 					terminarTimerNivelVictoria();
 				}
 			}
@@ -202,17 +189,8 @@ public class TimerNivel extends Timer{
 					//enemigos.add(new Pajaro(1,0,0));
 					enemigos.add(new Pajaro(1,0,(int) (Math.random()*3)));
 					System.out.println("Se ha generado un enemigo en ("+enemigos.get(enemigos.size()-1).getPos().getPosX()+","+enemigos.get(enemigos.size()-1).getPos().getPosY()+")");
-				
+					DibujarEdificio.getInstance().actualizar(edificioNivel.getSeccion(seccionActual).getMatrizVentanas(),seccionActual, enemigos);
 				}
-				/*
-				System.out.println("Se generaron ladrillos");
-				Enemigo[] ladrillos = Ralph.getInstance().golpearEdificio(Felix.getInstance().getPos().getPosX(), 1);
-				System.out.println(Ralph.getInstance().getCantLadrillos());
-				if(ladrillos != null)
-					for(Enemigo e:ladrillos)
-						enemigos.add(e);
-				
-				*/
 			}
 			
 		};
@@ -240,42 +218,15 @@ public class TimerNivel extends Timer{
 						if(nivelActual.hayColision(Felix.getInstance().getPos(), enemigos.get(i).getPos())) {
 							System.out.println("Felix ha sido golpeado! por "+enemigos.get(i));
 							Felix.getInstance().daniarse(enemigos.get(i));
+							if(enemigos.get(i).daniar().equals(EstadosFelix.GOLPEADOLADRILLO)) {
+								seccionActual = 0;
+								nivelActual.volverAPrimeraSeccion();
+							}
 							golpeado = true;
 						}
 			}
 			
 		};
-		
-		
-		
-		/*
-		TimerTask tiempoJuego = new TimerTask(){
-			
-			
-			int seccionActual = 0;
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				if(tiempoTotal == 0 && seccionActual != 2) {
-					System.out.println("Usted ha subido a la seccion " + seccionActual);
-					while(enemigos.size() != 0)
-						enemigos.remove(0);
-					Felix.getInstance().posInicial();
-					DibujarEdificio.getInstance().cambiarSeccion(edificioNivel.getSeccion(seccionActual).getMatrizVentanas(),seccionActual);
-					DibujarEdificio.getInstance().repaint();
-					//Provoca un NullPointerException
-					//nivelActual.terminar();
-					seccionActual++;
-					tiempoTotal = 10;
-				}
-				else if (tiempoTotal != 0){
-					tiempoTotal--;
-					System.out.println("Tiempo restante: "+tiempoTotal);
-				}
-			}
-			
-		};
-		*/
 		
 		Felix.getInstance().setEstado(EstadosFelix.NORMAL);
 		System.out.println("Estado de Felix: "+Felix.getInstance().getEstado());

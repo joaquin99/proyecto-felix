@@ -42,8 +42,10 @@ public class Pajaro extends Enemigo{
 		switch (nroSeccion) {
 		
 		case 0: posGrafica = new Posicion(45 + this.getPos().getPosX() * 52, 260 - 78 * this.getPos().getPosY()); break;
-		case 1: posGrafica = new Posicion(137 + this.getPos().getPosX() * 50, 260 - 78 * this.getPos().getPosY()); break;
-		default: posGrafica = new Posicion(137 + this.getPos().getPosX() * 50, 245 - 78 * this.getPos().getPosY());
+		//case 1: posGrafica = new Posicion(137 + this.getPos().getPosX() * 50, 260 - 78 * this.getPos().getPosY()); break;
+		//default: posGrafica = new Posicion(137 + this.getPos().getPosX() * 50, 245 - 78 * this.getPos().getPosY());
+		case 1: posGrafica = new Posicion(45 + this.getPos().getPosX() * 50, 260 - 78 * this.getPos().getPosY()); break;
+		default: posGrafica = new Posicion(45 + this.getPos().getPosX() * 50, 245 - 78 * this.getPos().getPosY());
 		
 		}
 		

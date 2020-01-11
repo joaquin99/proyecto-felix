@@ -44,6 +44,8 @@ public class VistaMenu{
     private final int dimXConfiguracion = 500;
     private final int dimYConfiguracion = 500;
     
+    private final int dimXComoJugar = 600;
+    private final int dimYComoJugar = 400;
     
     private JFrame frame;
     private boolean estaEnMenu = true;
@@ -221,7 +223,7 @@ public class VistaMenu{
             public void actionPerformed(ActionEvent e) {
                 //Carga el panelMenu del top 5
                 frame.remove(panelMenu);
-                frame.setBounds(100,100,dimXRanking,dimYRanking);
+                frame.setBounds(100,100,dimXComoJugar,dimYComoJugar);
                 frame.add(panelComoJugar,BorderLayout.CENTER);
                 frame.repaint();
                 
@@ -277,7 +279,7 @@ public class VistaMenu{
         btnConfiguracion.setBounds((int) frame.getBounds().getWidth()/5 + 130, 400, dimXBoton, dimYBoton);
         btnConfiguracion.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //Carga el panelMenu del top 5
+                //Carga el panel de configuracion
                 frame.remove(panelMenu);
                 frame.setBounds(100,100,dimXConfiguracion,dimYConfiguracion);
                 frame.add(panelConfiguracion,BorderLayout.CENTER);
@@ -293,22 +295,6 @@ public class VistaMenu{
         tablaRanking = new JTable();
         panelRanking.add(tablaRanking,BorderLayout.CENTER);
         tablaRanking.setBounds(0, 0, 434, 194);
-        
-        /*
-        tablaRanking.setModel(new DefaultTableModel(
-            new Object[][] {
-                {"Posicion","Nombre","Puntaje"},
-                {"1", null, null},
-                {"2", null, null},
-                {"3", null, null},
-                {"4", null, null},
-                {"5", null, null},
-            },
-            new String[] {
-                "New column", "New column", "New column"}
-        ));
-        */
-        
         
         tablaRanking.setModel(accederModeloTabla.getTabla());
         
@@ -329,15 +315,36 @@ public class VistaMenu{
     }
     
     private void iniciarPanelComoJugar() {
-        panelComoJugar = new JPanel();
+        panelComoJugar = new JPanel() {
+        	
+        	private String instrucciones = "imagenes/Instrucciones.png";
+        	
+        	public void dibujarInstrucciones(Graphics g) {
+        		
+        		try {
+        			URL instruccionesURL = getClass().getClassLoader().getResource(instrucciones);
+        			Image imagenInstrucciones = ImageIO.read(instruccionesURL);
+        			g.drawImage(imagenInstrucciones, 0, 0, null);
+        		}
+        		catch(Exception e) {
+        			e.printStackTrace();
+        		}
+        		
+        		
+        	} 
+        	
+        	@Override
+        	protected void paintComponent(Graphics arg0) {
+        		// TODO Auto-generated method stub
+        		super.paintComponent(arg0);
+        		dibujarInstrucciones(arg0);
+        	}
+        };
         panelComoJugar.setLayout(new BorderLayout());
         
         titulo = new JLabel("Fix It Felix");
         panelComoJugar.add(titulo,BorderLayout.NORTH);
         titulo.setFont(new Font(titulo.getFont().getName(),titulo.getFont().getStyle(),titulo.getFont().getSize()+10));
-        
-        instrucciones = new JLabel("Controla a Felix traves del edificio");
-        panelComoJugar.add(instrucciones,BorderLayout.CENTER);
         
         btnVolverAlMenu = new JButton("Volver al Menu");
         btnVolverAlMenu.addActionListener(new ActionListener() {
@@ -424,12 +431,12 @@ public class VistaMenu{
         
         panelConfiguracion = new JPanel(){
           
-        
+        //Pegar grafico del modulo I
             
         };
         panelConfiguracion.setLayout(null);
         
-        String[] opciones = {"Nivel 1","Nivel 2","Nivel 3","Nivel 4","Nivel 5"};
+        String[] opciones = {"Nivel 1","Nivel 2","Nivel 3","Nivel 4","Nivel 5","Nivel 6","Nivel 7","Nivel 8","Nivel 9","Nivel 10"};
         seleccionNivel = new JComboBox<String>(opciones);
         
         seleccionNivel.addActionListener(new ActionListener() {

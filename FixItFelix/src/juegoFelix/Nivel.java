@@ -117,6 +117,10 @@ public class Nivel {
 			this.seccionActual++;
 	}
 	
+	public void volverAPrimeraSeccion() {
+		this.seccionActual = 0;
+	}
+	
 	//Evalua si pudo ganar
 	public boolean ganoNivel() {
 		

@@ -209,18 +209,10 @@ public class DibujarEdificio extends JPanel{
 				g.drawImage(imgPajaro.aleteo1, enemigos.get(i).posicionGrafica(nroSeccion).getPosX(), enemigos.get(i).posicionGrafica(nroSeccion).getPosY(), null);
 		}
 		
-		//Prueba de mostrar info del jugador y el nivel
+		//Actualiza info del jugador y el nivel
 		actualizarDatos();
 		
 	}
-	
-//	@Override
-//	public void paintComponent(Graphics g){
-//		//super.paintComponents(g);
-//		dibujar(g);
-//	}
-	
-	
 	
 	public void actualizar(Ventana[][] ventanas, int nroSec, ArrayList <Enemigo> enemigos) {
 		this.ventanas = ventanas;
@@ -357,5 +349,3 @@ public class DibujarEdificio extends JPanel{
 		nroNivelActual.setText("Nivel: "+nroNivel);
 	}
 }
-/*
-*/
