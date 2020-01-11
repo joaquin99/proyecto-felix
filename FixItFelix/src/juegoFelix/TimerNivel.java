@@ -220,7 +220,6 @@ public class TimerNivel extends Timer{
 							Felix.getInstance().daniarse(enemigos.get(i));
 							if(enemigos.get(i).daniar().equals(EstadosFelix.GOLPEADOLADRILLO)) {
 								seccionActual = 0;
-								nivelActual.volverAPrimeraSeccion();
 							}
 							golpeado = true;
 						}
@@ -235,7 +234,7 @@ public class TimerNivel extends Timer{
 		this.schedule(generarEnemigos,SEGUNDO*5,SEGUNDO*10);
 		this.schedule(generarTarta,SEGUNDO*20,SEGUNDO*10);
 		this.schedule(controlarInmunidad, 0,SEGUNDO);
-		this.schedule(comportamientoEnemigos,0,SEGUNDO);
+		this.schedule(comportamientoEnemigos,0,PorcentajeAumento.calcularDisminucion(SEGUNDO*2, nivelActual.nroNivel));
 		this.schedule(danioEnemigos,0,SEGUNDO/10);
 		this.schedule(tiempoJuego,0,SEGUNDO);
 		this.schedule(lanzamientoLadrillos,SEGUNDO*5,PorcentajeAumento.calcularDisminucion(SEGUNDO*10, nivelActual.nroNivel-1));

@@ -40,9 +40,9 @@ public class ControladorJugar{
 			else if(!ganoNivel(nivelActual)){
 				
 				System.out.println("Has perdido una vida");
-				
 				//Reinicia el nivel
 				if(Felix.getInstance().getEstado() == EstadosFelix.GOLPEADOLADRILLO) {
+					nivelActual.volverAPrimeraSeccion();
 					nivelActual.reiniciar();
 				}
 				//Reinicia la seccion

@@ -16,7 +16,7 @@ import juegoFelix.Seccion;
 
 public class Nivel {
 
-	TimerNivel timer;
+	private TimerNivel timer;
 	
 	private int seccionActual;
 	
