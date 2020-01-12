@@ -147,7 +147,6 @@ public class TimerNivel extends Timer{
 							System.out.println("Se ha generado una tarta!");
 							ventanasSeccion[i][j].setTarta(true);
 							tartaGenerada = true;
-							//Agregar tarta en grafica
 						}
 				}
 			}	
@@ -186,7 +185,6 @@ public class TimerNivel extends Timer{
 				// TODO Auto-generated method stub
 				if(Math.random()*2 > 1) {
 					//Se genera un pajaro
-					//enemigos.add(new Pajaro(1,0,0));
 					enemigos.add(new Pajaro(1,0,(int) (Math.random()*3)));
 					System.out.println("Se ha generado un enemigo en ("+enemigos.get(enemigos.size()-1).getPos().getPosX()+","+enemigos.get(enemigos.size()-1).getPos().getPosY()+")");
 					DibujarEdificio.getInstance().actualizar(edificioNivel.getSeccion(nivelActual.getSeccionActual()).getMatrizVentanas(),nivelActual.getSeccionActual(), enemigos);

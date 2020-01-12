@@ -84,7 +84,9 @@ public class Nivel {
 		Felix.getInstance().posInicial();
 		Ralph.getInstance().reiniciar();
 		//Prueba para que genere las secciones (de lo contrario llama al constructor vacio)
-		edificioNivel = new Edificio(0.5);
+		edificioNivel = new Edificio(0.025*(PorcentajeAumento.calcularAumento(10,this.nroNivel)));
+		//edificioNivel = new Edificio(0.5);
+		System.out.println("Porcentaje de ventanas: "+0.03*PorcentajeAumento.calcularAumento(10,this.nroNivel));
 		timer = new TimerNivel(this,edificioNivel);
 		
 	}
