@@ -1,18 +1,22 @@
 package graficos;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Label;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import controladores.ControladorFelix;
 import edificio.*;
 import entidades.*;
-import juegoFelix.ControladorFelix;
 
 public class DibujarEdificio extends JPanel{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	private Ventana[][] ventanas;
 	private ArrayList <Enemigo> enemigos;
@@ -114,12 +118,9 @@ public class DibujarEdificio extends JPanel{
 		
 		switch (nroSeccion) { //Va a dibujar una version del edificio dependiendo de la seccion
 		
-		case 0:
-			g.drawImage(imgEd.paredBase,0,0,null);break;
-		case 1:
-			g.drawImage(imgEd.paredMedio,0,0,null);break;
-		case 2:
-			g.drawImage(imgEd.paredTecho,0,0,null);break;
+		case 0: g.drawImage(imgEd.paredBase,0,0,null);break;
+		case 1: g.drawImage(imgEd.paredMedio,0,0,null);break;
+		case 2: g.drawImage(imgEd.paredTecho,0,0,null);break;
 		default: System.out.println("Error al pasar la seccion");
 		}
 		
@@ -153,10 +154,15 @@ public class DibujarEdificio extends JPanel{
 										case ABAJO: g.drawImage(imgObstaculo.obstaculoMaceta,40+j*52,305-78*i,null); break;
 										case ARRIBA: g.drawImage(imgObstaculo.obstaculoTecho,35+j*52,260-78*i,null); break;
 									}
+
+									if(ventanas[j][i].hayTarta()) { 
+										g.drawImage(imgTarta.tarta,45+52*j,292-78*i,null);
+										System.out.println("Hay tarta en [" + j + "][" + i + "]");
+									}
 								}
 							}
 						}
-			
+					
 				}
 				else
 					if(nroSeccion == 1){
@@ -166,8 +172,12 @@ public class DibujarEdificio extends JPanel{
 						if(ventanas[j][i].getHayObstaculos()){
 							for(int k = 0; k < ventanas[j][i].getObstaculos().length; k++){
 								switch(ventanas[j][i].getObstaculos()[k].getDirObstaculo()){
-									case ABAJO: g.drawImage(imgObstaculo.obstaculoMaceta,42+j*50,315-70*i,null); break;
+									case ABAJO: g.drawImage(imgObstaculo.obstaculoMaceta,42+j*50,320-70*i,null); break;
 									case ARRIBA: g.drawImage(imgObstaculo.obstaculoTecho,37+j*50,275-70*i,null); break;
+								}
+								if(ventanas[j][i].hayTarta()) {
+									g.drawImage(imgTarta.tarta,47+50*j,307-78*i,null);
+									System.out.println("Hay tarta en [" + j + "][" + i + "]");
 								}
 							}
 						}
@@ -184,14 +194,14 @@ public class DibujarEdificio extends JPanel{
 										case ABAJO: g.drawImage(imgObstaculo.obstaculoMaceta,42+j*50,290-78*i,null); break;
 										case ARRIBA: g.drawImage(imgObstaculo.obstaculoTecho,37+j*50,245-78*i,null); break;
 									}
+
+									if(ventanas[j][i].hayTarta()) { 
+										g.drawImage(imgTarta.tarta,47+50*j,277-78*i,null);
+										System.out.println("Hay tarta en [" + j + "][" + i + "]");
+									}
 								}
 							}
 						}
-				
-				//Dibuja la tarta
-				if(ventanas[j][i].hayTarta()) {
-					g.drawImage(imgTarta.tarta,47+50*j,276-78*i,null);
-				}
 				
 			}
 			
@@ -246,13 +256,7 @@ public class DibujarEdificio extends JPanel{
 		
 		return imagen;
 	}
-	
-	@Override
-	public void paintComponents(Graphics g) {
-		// TODO Auto-generated method stub
-		super.paintComponents(g);
-		dibujar(g);
-	}
+
 
 	public Image quePuertaEs(Ventana ventana){
 		Image imagen = null;
@@ -265,7 +269,7 @@ public class DibujarEdificio extends JPanel{
 		
 		case 2: imagen = imgVentana.puerta2; break;
 			
-		case 3: imagen = imgVentana.puerta3; break;
+		default: imagen = imgVentana.puerta3; break;
 			
 		}
 		
@@ -279,9 +283,7 @@ public class DibujarEdificio extends JPanel{
 		switch (ventana.getCantPanelesRotos()){
 		
 		case 0: imagen = imgVentana.ventanaSemicircularArreglada; break;
-
 		case 1: imagen = imgVentana.ventanaSemicircular1; break;
-		
 		default: imagen = imgVentana.ventanaSemicircular2; break;
 			
 		}
@@ -295,9 +297,7 @@ public class DibujarEdificio extends JPanel{
 		switch (panel.getEstado()){
 
 		case SEMIRROTO: imagen = imgVentana.panelSemirroto; break;
-		
 		case SANO: imagen = imgVentana.panelArreglado; break;
-		
 		case ROTO: imagen = null;
 			
 		}

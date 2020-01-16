@@ -1,0 +1,21 @@
+1c849f7 Arreglos: -Se elimina la opcion de mostrar las vidas en consola con V
+0d38b01 Arreglos: -Se hace que la cantidad de ventanas rotas y obstaculos vaya aumentando -Se eliminan archivos con informacion innecesaria
+7f4745c Arreglos: -Se elimina codigo innecesario -Se elimina un atributo innecesario en TimerNivel -Se agrega la generacion aleatoria de obstaculos
+6d079e2 Arreglos: -La velocidad de los enemigos va aumentando -Se corrige un error sobre el efecto de los ladrillos
+16c4bee Arreglos: -Se agregan las instrucciones en la ventana "Reglas del juego" -Se grafica a los pajaros desde que se generan -Se reposicionan las graficas de los pajaros y ladrillos
+03bfbc1 Arreglos: -Se eliminan lineas innecesarias -Se suman 500 puntos al arreglar el ultimo panel
+c962e22 Arreglos: -Se deben completar 10 niveles, en vez de 9 -Se elimina codigo innecesario
+1ece37c Arreglos: -Si lo golpea un pajaro repite la seccion en vez del nivel
+90d4f3d Arreglos: -Se agrega el metodo a la clase auxiliar para calcular disminucion -Se va aumentando la frecuencia con la que Ralph lanza ladrillos -Se agrega informacion en pantalla de la vida, puntos y tiempo de Felix, y el nivel actual
+c0fb4cb Cambios: -Se impide redimensionar la pantalla de juego -Se agrega un tiempo maximo para terminar el nivel -Agrega clase auxiliar para calcular aumentos de porcentaje
+df0b966 Arreglos: -Actualiza las estadisticas cada vez que se abren -Se corrige el movimiento de Ralph, aunque puede mejorar -Se corrige su posicion en la grafica, aunque puede mejorar Queda por arreglar: -un error al pasar de seccion en la graficacion de los obstaculos (nullPointerException) -Encontrar forma de incluir info en pantalla y mejorar estetica -Tiempo máximo -Puntuacion extra por ultimo panel -Mejoarar posicionamiento de Felix, tartas, pajaros y Ralph
+7933d28 Permite guardar a los jugadores que ganaron en el ranking e implementa la info en pantalla del juego, aunque todavia no aparece por problemas en el graficado
+c181c69 Agregado: -Se hace que las tartas empiecen a generarse despues de 20 segundos de empezado el juego -Se agregan los ladrillos, lanzados de a varios por Ralph -Se mejorar posicion de Felix, aunque podria mejorarse mas -Se agrega un timertask para que maneje los controles de colision Queda por hacer: -Movimiento de Ralph -Controlar velocidad y frecuencia de ladrillos y pajaros -Comprobar que los ladrillos te devuelven al comienzo del nivel -Controlar el cambio de dificultad -Guardar ganadores con suficiente puntaje -Estetica e informacion en pantalla
+2ec8167 Agrega la generacion de tartas que dan inmunidad en las ventanas, las grafica y controla el tiempo de inmunidad
+77ac3dc Permite rejugar y elimina pantalla del juego una vez terminado
+f949ddc Arreglos: -Permite pasar de seccion sin problemas -Permite pasar de nivel sin problemas -permite que Felix reciba daño y tenga que reiniciar la seccion -permite que el jugador gane o pierda Queda por hacer: -Se debe eliminar la pantalla del juego una vez terminado -Se debe permitir rejugar (Se queda en el estado de la partida anterior) y guardar puntos -Agregar ladrillos,tartas y mejorar generacion pajaros -Acomodar a Felix, informacion en pantalla y otros detalles
+84e13a8 Arregla el boton de "martillar" para dar 1 martillazo a una ventana a la vez; permite subir de seccion y de nivel hasta el nivel 4; tambien se intenta arreglar el tema de la posicion de Felix en las ventanas de las secciones 1 y 2, aunque puede mejorarse
+02b02a7 Se corrige el error del movimiento de Felix, haciendo que se mueva una sola vez cada vez que se apreta la tecla. Para esto se cambio de lugar el addKeyListener de la instancia de DibujarNivel para que se haga en su constructor, y se agrego el metodo getControlPersonaje, para que la variable controlPersonaje de clase controladorFelix puede inicializarse en el constructor de DibujarEdificio y retornada para DibujarNivel.
+20df1c8 Merge branch 'master' of https://github.com/joaquin99/proyecto-felix
+b2a5222 Initial commit
+7b4eede Se agrego en la clase VistaMenu, metodo agregarPanelEstadistica, la creacion del archivo "datos.out" en caso de que no exista, corrigiendo el fallo que no le deja iniciar el menu. Queda corregir errores en el juego

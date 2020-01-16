@@ -14,7 +14,7 @@ public class Edificio {
 	
 	//Constructor de nivel
 	public Edificio(Double porcentaje) {
-
+		System.out.println("Porcentaje: "+porcentaje*15);
 		this.cantVentanasConObstaculos = (int)(ANCHO*ALTURA*porcentaje);
 		this.cantVentanasRotas = (int)(ANCHO*ALTURA*porcentaje);
 		secciones = new Seccion[SECCIONES];
@@ -33,7 +33,7 @@ public class Edificio {
 			
 			auxO = auxVentanasConObstaculos / (SECCIONES - i);
 			auxVentanasConObstaculos = auxVentanasConObstaculos - auxO;
-			
+			System.out.println("auxO = "+auxO);
 			secciones[i] = new Seccion(auxR, auxO, i);
 		}
 	}

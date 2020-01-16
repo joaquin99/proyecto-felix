@@ -29,11 +29,11 @@ public class Seccion {
 	
 	public void iniciarSeccion(int nroSeccion) {
 		
-		int auxCVCH = (int) PORCENTAJE*cantVentanasConObstaculos;									//cantVentanasConHojas
+		int auxCVCH = (int) (PORCENTAJE*cantVentanasConObstaculos);									//cantVentanasConHojas
 		int auxCVR = cantVentanasRotas;
 		int auxCVO = cantVentanasConObstaculos;
 		int auxCTV = ANCHO * ALTURA;
-		
+		System.out.println("auxCVCH = "+auxCVCH+" = "+PORCENTAJE+"*"+cantVentanasConObstaculos);
 		double aleatorioVRotas, aleatorioObstaculos, aleatorioObstaculoConHoja;
 		boolean estaArreglado;
 		boolean tieneObstaculo;
@@ -43,10 +43,12 @@ public class Seccion {
 				aleatorioVRotas = Math.random();
 				aleatorioObstaculos = Math.random();
 				//aleatorioObstaculos = 1;
-				aleatorioObstaculoConHoja = Math.random();
+				//aleatorioObstaculoConHoja = Math.random();
+				aleatorioObstaculoConHoja = 0;
 				estaArreglado = !(aleatorioVRotas < (auxCVR/auxCTV));
 				tieneObstaculo = (aleatorioObstaculos < (auxCVO/auxCTV));
-				obstaculoHoja = (aleatorioObstaculoConHoja < auxCVCH/auxCVO);
+				obstaculoHoja = (aleatorioObstaculoConHoja <= auxCVCH/auxCVO);
+				System.out.println(aleatorioObstaculoConHoja+" < "+auxCVCH+"/"+auxCVO+" = "+obstaculoHoja);
 				if(nroSeccion == 0){
 					if((j == 2) && (i == 0))
 						ventanas[j][i] = new VentanaPuerta(estaArreglado,false);
@@ -56,9 +58,11 @@ public class Seccion {
 				}
 				
 				if(tieneObstaculo){
+					System.out.println("Condiciones: "+obstaculoHoja+" && "+estaArreglado);
 					if(obstaculoHoja && estaArreglado){
 						ventanas[j][i] = new VentanaHoja(estaArreglado, tieneObstaculo);
 						auxCVCH--;
+						System.out.println("Se genero una ventana con hoja");
 					}
 					else
 						ventanas[j][i] = new VentanaObstaculo(estaArreglado, tieneObstaculo);

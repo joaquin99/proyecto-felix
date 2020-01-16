@@ -1,0 +1,33 @@
+-Se hace que la cantidad de ventanas rotas y obstaculos vaya aumentando
+-Se elimina codigo innecesario 
+-Se elimina un atributo innecesario en TimerNivel 
+-Se agrega la generacion aleatoria de obstaculos
+-La velocidad de los enemigos va aumentando 
+-Se corrige un error sobre el efecto de los ladrillos
+-Se agregan las instrucciones en la ventana "Reglas del juego" 
+-Se grafica a los pajaros desde que se generan 
+-Se reposicionan las graficas de los pajaros y ladrillos
+-Se suman 500 puntos al arreglar el ultimo panel
+-Se deben completar 10 niveles, en vez de 9 
+-Si lo golpea un pajaro repite la seccion en vez del nivel
+-Se agrega el metodo a la clase auxiliar para calcular disminucion 
+-Se va aumentando la frecuencia con la que Ralph lanza ladrillos 
+-Se agrega informacion en pantalla de la vida, puntos y tiempo de Felix, y el nivel actual
+-Se impide redimensionar la pantalla de juego 
+-Se agrega un tiempo maximo para terminar el nivel 
+-Agrega clase auxiliar para calcular aumentos de porcentaje
+-Actualiza las estadisticas cada vez que se abren 
+-Permite guardar a los jugadores que ganaron en el ranking e implementa la info en pantalla del juego, aunque todavia no aparece por problemas en el graficado
+-Se hace que las tartas empiecen a generarse despues de 20 segundos de empezado el juego 
+-Se agregan los ladrillos, lanzados de a varios por Ralph 
+-Se mejorar posicion de Felix, Ralph, los pajaros y ladrillos
+-Se agrega un timertask para que maneje los controles de colision
+-Agrega la generacion de tartas que dan inmunidad en las ventanas, las grafica y controla el tiempo de inmunidad
+-Permite rejugar y elimina pantalla del juego una vez terminado
+-Permite pasar de seccion sin problemas 
+-Permite pasar de nivel sin problemas 
+-permite que Felix reciba daño y tenga que reiniciar la seccion 
+-permite que el jugador gane o pierda
+-Arregla el boton de "martillar" para dar 1 martillazo a una ventana a la vez;
+-Se corrige el error del movimiento de Felix, haciendo que se mueva una sola vez cada vez que se apreta la tecla. Para esto se cambio de lugar el addKeyListener de la instancia de DibujarNivel para que se haga en su constructor, y se agrego el metodo getControlPersonaje, para que la variable controlPersonaje de clase controladorFelix puede inicializarse en el constructor de DibujarEdificio y retornada para DibujarNivel.
+-Se agrego en la clase VistaMenu, metodo agregarPanelEstadistica, la creacion del archivo "datos.out" en caso de que no exista, corrigiendo el fallo que no le deja iniciar el menu. Queda corregir errores en el juego

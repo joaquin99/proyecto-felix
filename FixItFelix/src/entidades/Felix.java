@@ -1,6 +1,6 @@
 package entidades;
 import edificio.*;
-import juegoFelix.*;
+import principal.*;
 
 public class Felix extends Entidad{
 	
@@ -148,6 +148,14 @@ public class Felix extends Entidad{
 							}
 						}
 					}
+					else
+						if(ventanaActual.tieneObstaculos()){
+							Obstaculo [] obstaculosVA = ventanaActual.getObstaculos();
+							for(int i = 0; ((i < obstaculosVA.length)&&(!frenar)); i++){
+								if(obstaculosVA[i].getDirObstaculo().equals(Direccion.IZQUIERDA))
+									frenar = true;
+							}
+						}
 			if(!frenar) {
 				//Se prueba para intentar recolectar tarta
 				if(getDireccion() == Direccion.IZQUIERDA)

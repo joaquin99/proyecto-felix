@@ -43,6 +43,16 @@ public class ControladorFelix implements KeyListener{
 				for(int j = 0;j < matrizVentanas[i].length;j++) {
 					if(matrizVentanas[i][j].hayTarta())
 						System.out.print("T ");
+					else if(matrizVentanas[i][j].getHayObstaculos()) {
+						int g = 0;
+						while(g < matrizVentanas[i][j].getObstaculos().length) {
+							if(matrizVentanas[i][j].getObstaculos()[g].getDirObstaculo().equals(Direccion.DERECHA) && (matrizVentanas[i][j].getObstaculos()[g].getDirObstaculo().equals(Direccion.IZQUIERDA))) {
+								g = 100;
+								System.out.println("H ");
+							}
+							g++;
+						}
+					}
 					else if(matrizVentanas[i][j].getEstaArreglado())
 						System.out.print("O ");
 					else

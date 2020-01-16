@@ -1,6 +1,6 @@
 package entidades;
 
-import juegoFelix.Seccion;
+import edificio.Seccion;
 
 public class Ralph extends Entidad {
 	 

@@ -4,8 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import controladores.ControladorFelix;
 import entidades.Felix;
-import juegoFelix.ControladorFelix;
 
 public class DibujarNivel extends JFrame{
 	
